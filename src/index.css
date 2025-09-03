@@ -1,0 +1,67 @@
+.fixed-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  background-color: rgba(17, 24, 39, 0.95);
+  border-bottom: 1px solid rgba(55, 65, 81, 0.8);
+  padding: 1rem 0;
+}
+
+.fixed-nav-light {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+}
+
+.main-content {
+  padding-top: 80px;
+}
+.light {
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --bg-primary: #f9fafb;
+  --bg-secondary: #ffffff;
+  --border-color: #e5e7eb;
+}
+
+.light .bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
+.light .text-gray-400 {
+  color: #6b7280;
+}
+
+.light .text-gray-300 {
+  color: #9ca3af;
+}
+
+.light .bg-gray-800 {
+  background-color: #f3f4f6;
+}
+
+.light .bg-gray-900 {
+  background-color: #f9fafb;
+}
+
+.light .border-gray-700 {
+  border-color: #e5e7eb;
+}
+
+.light .bg-blue-400 {
+  background-color: #3b82f6;
+}
+
+.light .text-blue-400 {
+  color: #3b82f6;
+}
+
+.light .text-green-400 {
+  color: #10b981;
+}
+
+.light .text-purple-400 {
+  color: #8b5cf6;
+}
