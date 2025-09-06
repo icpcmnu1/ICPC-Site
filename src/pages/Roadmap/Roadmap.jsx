@@ -161,7 +161,7 @@ const Roadmap = ({ darkMode }) => {
 
   return (
     <div
-      className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 min-h-screen py-20 px-6 pt-24 ${
+      className={`min-h-screen py-20 px-6 pt-24 ${
         darkMode ? "bg-gray-900" : "bg-gray-50"
       }`}
     >
@@ -186,9 +186,9 @@ const Roadmap = ({ darkMode }) => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="flex flex-col lg:flex-row gap-8">
           {/* Main Roadmap Content */}
-          <div className="lg:col-span-2 space-y-8">
+          <div className="lg:w-2/3 space-y-8">
             {roadmapData.map((level, index) => (
               <div
                 key={index}
@@ -447,7 +447,7 @@ const Roadmap = ({ darkMode }) => {
           </div>
 
           {/* Sidebar with Additional Features */}
-          <div className="space-y-8">
+          <div className="lg:w-1/3 space-y-6">
             {/* Success Stories Carousel */}
             <div
               className={`p-6 rounded-2xl shadow-lg ${

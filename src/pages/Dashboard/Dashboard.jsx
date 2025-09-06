@@ -171,13 +171,13 @@ const Dashboard = ({ darkMode }) => {
 
   return (
     <div
-      className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 min-h-screen py-20 px-6 pt-24 ${
+      className={`min-h-screen py-20 px-6 pt-24 ${
         darkMode ? "bg-gray-900" : "bg-gray-50"
       }`}
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 w-full">
           <h1
             className={`text-5xl font-bold mb-6 ${
               darkMode ? "text-white" : "text-gray-900"
@@ -199,7 +199,7 @@ const Dashboard = ({ darkMode }) => {
         </div>
 
         {/* Tabs */}
-        <div className="flex border-b mb-8">
+        <div className="flex border-b mb-8 w-full">
           {[
             {
               id: "progress",
@@ -238,22 +238,13 @@ const Dashboard = ({ darkMode }) => {
 
         {/* Progress Overview */}
         {activeTab === "progress" && (
-          <div className="space-y-8">
+          <div className="space-y-8 w-full">
             <div
               className={`p-6 rounded-2xl shadow-lg ${
                 darkMode ? "bg-gray-800" : "bg-white"
-              }`}
+              } w-full`}
             >
-              <h2
-                className={`text-2xl font-bold mb-6 flex items-center gap-3 ${
-                  darkMode ? "text-white" : "text-gray-900"
-                }`}
-              >
-                <TrendingUp className="text-blue-500" />
-                Progress Overview
-              </h2>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
                 {/* Progress Stats */}
                 <div className="space-y-6">
                   {stats.map((stat, idx) => (
@@ -340,7 +331,7 @@ const Dashboard = ({ darkMode }) => {
                   >
                     Level Progression
                   </h3>
-                  <div className="space-y-4">
+                  <div className="space-y-6 w-full">
                     {roadmapData.map((level, idx) => {
                       const progress = Math.round(
                         (communityProgress.currentLevels[idx] /
@@ -349,7 +340,7 @@ const Dashboard = ({ darkMode }) => {
                       );
 
                       return (
-                        <div key={idx} className="group">
+                        <div key={idx} className="group w-full">
                           <div className="flex justify-between items-center mb-2">
                             <span
                               className={`font-medium ${
@@ -405,7 +396,7 @@ const Dashboard = ({ darkMode }) => {
             <div
               className={`p-6 rounded-2xl shadow-lg ${
                 darkMode ? "bg-gray-800" : "bg-white"
-              }`}
+              } w-full`}
             >
               <h2
                 className={`text-2xl font-bold mb-6 flex items-center gap-3 ${
@@ -416,7 +407,7 @@ const Dashboard = ({ darkMode }) => {
                 Upcoming Initiatives
               </h2>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
                 {initiatives.map((initiative, idx) => (
                   <div
                     key={idx}
@@ -491,7 +482,7 @@ const Dashboard = ({ darkMode }) => {
           <div
             className={`p-6 rounded-2xl shadow-lg ${
               darkMode ? "bg-gray-800" : "bg-white"
-            }`}
+            } w-full`}
           >
             <h2
               className={`text-2xl font-bold mb-6 flex items-center gap-3 ${
@@ -502,7 +493,7 @@ const Dashboard = ({ darkMode }) => {
               Our 2024 Goals
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
               {/* Community Growth */}
               <div>
                 <h3
@@ -570,7 +561,7 @@ const Dashboard = ({ darkMode }) => {
               </div>
 
               {/* Competitive Goals */}
-              <div>
+              <div className="w-full">
                 <h3
                   className={`text-xl font-semibold mb-4 ${
                     darkMode ? "text-white" : "text-gray-900"
@@ -669,7 +660,7 @@ const Dashboard = ({ darkMode }) => {
           <div
             className={`p-6 rounded-2xl shadow-lg ${
               darkMode ? "bg-gray-800" : "bg-white"
-            }`}
+            } w-full`}
           >
             <h2
               className={`text-2xl font-bold mb-6 flex items-center gap-3 ${
@@ -680,7 +671,7 @@ const Dashboard = ({ darkMode }) => {
               Learning Path
             </h2>
 
-            <div className="space-y-8">
+            <div className="space-y-8 w-full">
               {roadmapData.map((level, idx) => (
                 <div
                   key={idx}
