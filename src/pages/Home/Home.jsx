@@ -8,7 +8,7 @@ const HomePage = ({ darkMode, setCurrentPage }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % communityImages.length);
-    }, 4000);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 

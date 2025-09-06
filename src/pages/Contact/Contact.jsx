@@ -45,7 +45,16 @@ const Contact = ({ darkMode }) => {
             </h2>
 
             <div className="space-y-6">
-              <div className="flex items-center gap-4">
+              <div
+                className="flex items-center gap-4 cursor-pointer"
+                onClick={() =>
+                  window.open(
+                    "https://maps.app.goo.gl/Zg6jVgqdX886wa437",
+                    "_blank"
+                  )
+                }
+                style={{ cursor: "pointer" }}
+              >
                 <div
                   className={`w-12 h-12 rounded-full ${
                     darkMode ? "bg-blue-900/30" : "bg-blue-100"
@@ -122,14 +131,27 @@ const Contact = ({ darkMode }) => {
               </h3>
               <div className="flex gap-4">
                 {[
-                  { icon: Github, href: "#", color: "gray" },
-                  { icon: Facebook, href: "#", color: "blue" },
-                  { icon: Instagram, href: "#", color: "pink" },
-                  { icon: Linkedin, href: "#", color: "blue" },
+                  //{ icon: Github, href: "#", color: "gray" },
+                  {
+                    icon: Facebook,
+                    href: "https://www.facebook.com/share/19QcYmDCRi/",
+                    color: "blue",
+                  },
+                  {
+                    icon: Instagram,
+                    href: "https://www.instagram.com/icpcmnu?igsh=dGI5aDN1NDlnam52",
+                    color: "pink",
+                  },
+                  {
+                    icon: Linkedin,
+                    href: "https://www.linkedin.com/company/icpc-mnu-community/posts/?feedView=all",
+                    color: "blue",
+                  },
                 ].map((social, index) => (
                   <a
                     key={index}
                     href={social.href}
+                    target="_blank"
                     className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 ${
                       darkMode
                         ? "bg-gray-800 hover:bg-gray-700 text-white"

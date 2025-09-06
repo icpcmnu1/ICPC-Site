@@ -11,11 +11,20 @@ const Footer = ({ darkMode, setCurrentPage }) => {
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-3 gap-8">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-                <Code className="w-5 h-5 text-white" />
+            <div
+              className="flex items-center gap-2 cursor-pointer"
+              onClick={() => setCurrentPage("home")}
+            >
+              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center overflow-hidden">
+                <img
+                  src="https://github.com/Mazen-mo-10/imgs/blob/main/icon_Com.jpg?raw=true"
+                  alt="MNU ICPC Logo"
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <span className="text-lg font-bold">Minia ICPC</span>
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
+                MNU ICPC
+              </span>
             </div>
             <p
               className={`text-sm ${
@@ -70,13 +79,26 @@ const Footer = ({ darkMode, setCurrentPage }) => {
             </h3>
             <div className="flex gap-4">
               {[
-                { icon: Github, href: "#" },
-                { icon: Facebook, href: "#" },
-                { icon: Instagram, href: "#" },
-                { icon: Linkedin, href: "#" },
+                //{ icon: Github, href: "#", color: "gray" },
+                {
+                  icon: Facebook,
+                  href: "https://www.facebook.com/share/19QcYmDCRi/",
+                  color: "blue",
+                },
+                {
+                  icon: Instagram,
+                  href: "https://www.instagram.com/icpcmnu?igsh=dGI5aDN1NDlnam52",
+                  color: "pink",
+                },
+                {
+                  icon: Linkedin,
+                  href: "https://www.linkedin.com/company/icpc-mnu-community/posts/?feedView=all",
+                  color: "blue",
+                },
               ].map((social, index) => (
                 <a
                   key={index}
+                  target="_blank"
                   href={social.href}
                   className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 ${
                     darkMode

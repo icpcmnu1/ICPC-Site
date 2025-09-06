@@ -1,8 +1,8 @@
 export const communityImages = [
-  "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200",
-  "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=1200",
-  "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200",
-  "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=1200",
+  "https://github.com/Mazen-mo-10/imgs/blob/main/WhatsApp%20Image%202025-09-03%20at%201.38.55%20AM.jpeg?raw=true",
+  "https://github.com/Mazen-mo-10/imgs/blob/main/MNU_Photo.jpeg?raw=true",
+  "https://github.com/Mazen-mo-10/imgs/blob/main/2en-ICPC.jpeg?raw=true",
+  "https://github.com/Mazen-mo-10/imgs/blob/main/Boys-photo.jpeg?raw=true",
 ];
 
 export const stats = [

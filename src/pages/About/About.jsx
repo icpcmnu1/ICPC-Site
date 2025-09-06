@@ -31,14 +31,14 @@ const About = ({ darkMode }) => {
         <div className="space-y-12" data-animate>
           {[
             {
-              year: "2019",
+              year: "2023",
               title: "The Beginning",
               content:
                 "Started as a small group of passionate programmers with big dreams and endless determination.",
               icon: <Star className="w-6 h-6" />,
             },
             {
-              year: "2021",
+              year: "2023",
               title: "First Major Achievement",
               content:
                 "Qualified for our first ECPC finals, marking the beginning of our competitive journey.",
@@ -120,7 +120,6 @@ const About = ({ darkMode }) => {
                 <div
                   className={`w-16 h-16 rounded-xl bg-gradient-to-r ${division.color} flex items-center justify-center text-white mb-4 mx-auto`}
                 >
-                  {/* FIX: Render the icon as a component */}
                   <division.icon className="w-8 h-8" />
                 </div>
                 <h3

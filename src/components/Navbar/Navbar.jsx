@@ -8,8 +8,8 @@ import {
   Mail,
   Moon,
   Sun,
-  Code,
 } from "lucide-react";
+
 const Navbar = ({ darkMode, setDarkMode, currentPage, setCurrentPage }) => {
   return (
     <nav
@@ -28,8 +28,12 @@ const Navbar = ({ darkMode, setDarkMode, currentPage, setCurrentPage }) => {
             className="flex items-center gap-2 cursor-pointer"
             onClick={() => setCurrentPage("home")}
           >
-            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-              <Code className="w-6 h-6 text-white" />
+            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center overflow-hidden">
+              <img
+                src="https://github.com/Mazen-mo-10/imgs/blob/main/icon_Com.jpg?raw=true"
+                alt="MNU ICPC Logo"
+                className="w-full h-full object-cover"
+              />
             </div>
             <span className="text-xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
               MNU ICPC
@@ -87,4 +91,5 @@ const Navbar = ({ darkMode, setDarkMode, currentPage, setCurrentPage }) => {
     </nav>
   );
 };
+
 export default Navbar;

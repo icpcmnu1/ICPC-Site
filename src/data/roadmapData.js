@@ -4,7 +4,7 @@ export const roadmapData = [
   {
     level: 0,
     title: "Programming Fundamentals",
-    icon: Code, // Store the component, not JSX
+    icon: Code,
     color: "from-blue-500 to-cyan-500",
     problems: 150,
     contests: 8,

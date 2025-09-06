@@ -3,7 +3,7 @@ import { Brain, BookOpen, Target, Zap } from "lucide-react";
 export const divisions = [
   {
     name: "Problem Setters",
-    icon: Brain, // Store the component, not JSX
+    icon: Brain, 
     description:
       "Create challenging and educational problems for contests and training",
     color: "from-red-500 to-orange-500",
