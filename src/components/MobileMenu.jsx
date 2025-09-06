@@ -51,12 +51,12 @@ const MobileMenu = ({
             <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center overflow-hidden">
               <img
                 src="https://github.com/Mazen-mo-10/imgs/blob/main/icon_Com.jpg?raw=true"
-                alt="MNU ICPC Logo"
+                alt="ICPC MNU Logo"
                 className="w-full h-full object-cover"
               />
             </div>
             <span className="text-lg font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
-              MNU ICPC
+              ICPC MNU
             </span>
           </div>
           <button

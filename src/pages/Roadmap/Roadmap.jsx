@@ -110,15 +110,6 @@ const Roadmap = ({ darkMode }) => {
           "https://github.com/Mazen-mo-10/imgs/blob/main/MazenImg.jpg?raw=true",
       },
       {
-        name: "Ziad Ayman",
-        level: "Level 2",
-        achievement: "Codeforces Expert",
-        story:
-          "The roadmap helped me build a strong foundation in algorithms and data structures which enabled me to get solve 1400 problem.",
-        image:
-          "https://github.com/Mazen-mo-10/imgs/blob/main/Ziad_Img.jpeg?raw=true",
-      },
-      {
         name: "Anas Desouky",
         level: "Level 3",
         achievement: "AI Engineer",
@@ -126,6 +117,15 @@ const Roadmap = ({ darkMode }) => {
           "I loved problem solving and became interested in it and strengthened myself in data structure and algorithms.",
         image:
           "https://github.com/Mazen-mo-10/imgs/blob/main/Anas_Img.jpeg?raw=true",
+      },
+      {
+        name: "Ziad Ayman",
+        level: "Level 2",
+        achievement: "Codeforces Expert",
+        story:
+          "The roadmap helped me build a strong foundation in algorithms and data structures which enabled me to get solve 1400 problem.",
+        image:
+          "https://github.com/Mazen-mo-10/imgs/blob/main/Ziad_Img.jpeg?raw=true",
       },
     ];
     setSuccessStories(stories);

@@ -46,7 +46,7 @@ const Contact = ({ darkMode }) => {
 
             <div className="space-y-6">
               <div
-                className="flex items-center gap-4 cursor-pointer"
+                className="flex items-center gap-4 cursor-pointer transition-transform duration-200 hover:scale-105"
                 onClick={() =>
                   window.open(
                     "https://maps.app.goo.gl/Zg6jVgqdX886wa437",
@@ -76,11 +76,19 @@ const Contact = ({ darkMode }) => {
                 </div>
               </div>
 
-              <div className="flex items-center gap-4">
+              <div
+                className="flex items-center gap-4 transition-transform duration-200 hover:scale-105"
+                onClick={() =>
+                  (window.location.href = "mailto:icpcmnu1@gmail.com")
+                }
+                style={{ cursor: "pointer" }}
+              >
                 <div
                   className={`w-12 h-12 rounded-full ${
                     darkMode ? "bg-green-900/30" : "bg-green-100"
-                  } flex items-center justify-center`}
+                  } flex items-center justify-center transition-colors duration-200 ${
+                    darkMode ? "hover:bg-green-900/50" : "hover:bg-green-200"
+                  }`}
                 >
                   <Mail className="w-6 h-6 text-green-500" />
                 </div>
@@ -93,29 +101,7 @@ const Contact = ({ darkMode }) => {
                     Email
                   </h3>
                   <p className={darkMode ? "text-gray-400" : "text-gray-600"}>
-                    miniaicpc@mnu.edu.eg
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div
-                  className={`w-12 h-12 rounded-full ${
-                    darkMode ? "bg-purple-900/30" : "bg-purple-100"
-                  } flex items-center justify-center`}
-                >
-                  <Phone className="w-6 h-6 text-purple-500" />
-                </div>
-                <div>
-                  <h3
-                    className={`font-semibold ${
-                      darkMode ? "text-white" : "text-gray-900"
-                    }`}
-                  >
-                    Phone
-                  </h3>
-                  <p className={darkMode ? "text-gray-400" : "text-gray-600"}>
-                    +20 123 456 7890
+                    icpcmnu1@gmail.com
                   </p>
                 </div>
               </div>
