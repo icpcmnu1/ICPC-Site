@@ -54,7 +54,9 @@ const HomePage = ({ darkMode, setCurrentPage }) => {
       <div className="relative z-10 flex items-center justify-center min-h-screen px-6 pt-16">
         <div className="text-center max-w-4xl mx-auto">
           <div
-            className="mb-8 transform transition-all duration-1000 hover:scale-105"
+            className={`text-4xl md:text-6xl lg:text-8xl font-bold mb-4 ${
+              darkMode ? "text-white" : "text-gray-900"
+            } tracking-tight`}
             data-animate
           >
             <h1
@@ -92,7 +94,10 @@ const HomePage = ({ darkMode, setCurrentPage }) => {
             </p>
           </div>
 
-          <div className="flex gap-6 justify-center" data-animate>
+          <div
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+            data-animate
+          >
             <button
               onClick={() => setCurrentPage("about")}
               className="group px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105 flex items-center gap-3"
@@ -116,7 +121,7 @@ const HomePage = ({ darkMode, setCurrentPage }) => {
 
           {/* Stats */}
           <div
-            className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8"
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8"
             data-animate
           >
             {[

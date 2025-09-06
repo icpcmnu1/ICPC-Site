@@ -5,6 +5,7 @@ import { useScrollAnimation } from "./hooks/useScrollAnimation";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import MobileMenu from "./components/MobileMenu";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -16,6 +17,7 @@ import Contact from "./pages/Contact";
 const MiniaICPCCommunity = () => {
   const [currentPage, setCurrentPage] = useState("home");
   const [darkMode, setDarkMode] = useDarkMode();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { showScrollTop, scrollToTop } = useScrollAnimation();
   const scrollRef = useRef();
 
@@ -50,6 +52,15 @@ const MiniaICPCCommunity = () => {
           setDarkMode={setDarkMode}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
+          setMobileMenuOpen={setMobileMenuOpen}
+        />
+
+        <MobileMenu
+          darkMode={darkMode}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          isOpen={mobileMenuOpen}
+          onClose={() => setMobileMenuOpen(false)}
         />
 
         <main ref={scrollRef}>{renderPage()}</main>

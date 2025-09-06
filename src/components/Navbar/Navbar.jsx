@@ -8,9 +8,16 @@ import {
   Mail,
   Moon,
   Sun,
+  Menu, // أضف أيقونة القائمة
 } from "lucide-react";
 
-const Navbar = ({ darkMode, setDarkMode, currentPage, setCurrentPage }) => {
+const Navbar = ({
+  darkMode,
+  setDarkMode,
+  currentPage,
+  setCurrentPage,
+  setMobileMenuOpen,
+}) => {
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
@@ -40,7 +47,7 @@ const Navbar = ({ darkMode, setDarkMode, currentPage, setCurrentPage }) => {
             </span>
           </div>
 
-          {/* Navigation Links */}
+          {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center gap-8">
             {[
               { name: "Home", page: "home", icon: Home },
@@ -69,7 +76,7 @@ const Navbar = ({ darkMode, setDarkMode, currentPage, setCurrentPage }) => {
             ))}
           </div>
 
-          {/* Theme Toggle */}
+          {/* Theme Toggle and Mobile Menu Button */}
           <div className="flex items-center gap-4">
             <button
               onClick={() => setDarkMode(!darkMode)}
@@ -84,6 +91,18 @@ const Navbar = ({ darkMode, setDarkMode, currentPage, setCurrentPage }) => {
               ) : (
                 <Moon className="w-5 h-5" />
               )}
+            </button>
+
+            {/* Mobile Menu Button - يظهر فقط على الشاشات الصغيرة */}
+            <button
+              onClick={() => setMobileMenuOpen(true)}
+              className={`p-2 rounded-full md:hidden ${
+                darkMode
+                  ? "bg-gray-800 hover:bg-gray-700 text-white"
+                  : "bg-gray-200 hover:bg-gray-300 text-gray-700"
+              }`}
+            >
+              <Menu className="w-5 h-5" />
             </button>
           </div>
         </div>
