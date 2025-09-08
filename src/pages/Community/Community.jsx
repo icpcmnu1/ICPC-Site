@@ -160,9 +160,19 @@ const Community = ({ darkMode }) => {
       image:
         "https://github.com/Mazen-mo-10/imgs/blob/main/shady_Img.jpeg?raw=true",
       about:
-        "Dedicated and skilled problem setter with a passion for algorithms",
+        "Problem setter for the university ICPC team, creating well-structured and challenging problems to enhance students’ problem-solving skills.",
       rating: 4.7,
-      skills: ["Algorithms", "Problem Setting", "C++", "Data Structures"],
+      skills: [
+        "Algorithms",
+        "Problem Setting",
+        "C++",
+        "Data Structures",
+        "Machine Learning",
+        "Deep Learning",
+        "SQL",
+        "Python",
+        "Java",
+      ],
       links: {
         facebook: "https://www.facebook.com/share/1GXTWo2f5J/",
         linkedin: "https://www.linkedin.com/in/shady-ibrahim-60196a2b2/",
@@ -172,7 +182,7 @@ const Community = ({ darkMode }) => {
       name: "Abdullah Haitham",
       role: "Mentor",
       image:
-        "https://github.com/Mazen-mo-10/imgs/blob/main/abdullah_Haiam_Img.jpeg?raw=true",
+        "https://github.com/Mazen-mo-10/imgs/blob/main/abdall.jpeg?raw=true",
       about: "Advanced-level mentor with strong problem-solving skills",
       rating: 4.8,
       skills: [
