@@ -24,23 +24,6 @@ const Community = ({ darkMode }) => {
   // Team members data with individual ratings and skills
   const teamMembers = [
     {
-      name: "Yossef Behaa",
-      role: "Community Manager",
-      image:
-        "https://github.com/Mazen-mo-10/imgs/blob/main/yossef.jpeg?raw=true",
-      about: "Leader of the community and coordinator of all activities",
-      rating: 4.8,
-      skills: [
-        "Leadership",
-        "Organization",
-        "Communication",
-        "Team Management",
-      ],
-      links: {
-        facebook: "https://www.facebook.com/share/1ZXunReQZ3/",
-      },
-    },
-    {
       name: "Mazen Mohamed",
       role: "Problem Setter & Mentor",
       image:
@@ -73,39 +56,26 @@ const Community = ({ darkMode }) => {
       },
     },
     {
-      name: "Anas Mohamed",
-      role: "Mentor",
+      name: "Yossef Behaa",
+      role: "President",
       image:
-        "https://github.com/Mazen-mo-10/imgs/blob/main/Anas_Img.jpeg?raw=true",
-      about:
-        "Mentor with a talent for simplifying concepts and delivering high-quality explanations",
-      rating: 4.7,
-      skills: ["Teaching", "Algorithms", "Data Structures", "C++", "Python"],
-      links: {
-        linkedin: "https://www.linkedin.com/in/anas-desoky-762715242/",
-      },
-    },
-    {
-      name: "Ziad Ayman",
-      role: "Problem Setter",
-      image:
-        "https://github.com/Mazen-mo-10/imgs/blob/main/Ziad_Img.jpeg?raw=true",
-      about: "Problem setter specializing in high-level challenges",
+        "https://github.com/Mazen-mo-10/imgs/blob/main/yossef.jpeg?raw=true",
+      about: "Leader of the community and coordinator of all activities",
       rating: 4.8,
       skills: [
-        "Algorithms",
-        "Competitive Programming",
-        "C++",
-        "Problem Solving",
+        "Leadership",
+        "Organization",
+        "Communication",
+        "Team Management",
       ],
       links: {
-        github: "https://github.com/engzooz",
-        linkedin: "https://www.linkedin.com/in/ziad-ayman-8b3899364/",
+        facebook: "https://www.facebook.com/share/1ZXunReQZ3/",
+        linkedin: "https://www.linkedin.com/in/youssef%D9%80bahaa/",
       },
     },
     {
       name: "Steven Ezzat",
-      role: "Community Manager",
+      role: "Vice president",
       image:
         "https://github.com/Mazen-mo-10/imgs/blob/main/steven_Img.jpeg?raw=true",
       about: "Community admin overseeing organization and management",
@@ -114,6 +84,93 @@ const Community = ({ darkMode }) => {
       links: {
         facebook: "https://www.facebook.com/share/171mJoyLWF/",
         linkedin: "https://www.linkedin.com/in/steven-ezzat-18921a376/",
+      },
+    },
+    {
+      name: "Ahmed Safaa",
+      role: "Vice president",
+      image: "",
+      about:
+        "Results-driven vice president with exceptional analytical skills and talent for optimizing organizational performance",
+      rating: 4.8,
+      skills: [
+        "Performance Analysis",
+        "Process Optimization",
+        "Data-Driven Decisions",
+        "Stakeholder Management",
+        "Strategic Planning",
+      ],
+      links: {},
+    },
+    {
+      name: "Pola Amir",
+      role: "Vice president",
+      image: "",
+      about:
+        "Innovative leader with expertise in developing growth strategies and fostering collaborative environments for success",
+      rating: 4.7,
+      skills: [
+        "Growth Strategy",
+        "Innovation Management",
+        "Collaborative Leadership",
+        "Change Management",
+        "Communication",
+      ],
+      links: {},
+    },
+    {
+      name: "Ali Adel",
+      role: "HR Head",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/Ali_Img.jpeg?raw=true",
+      about:
+        "Community admin fostering team spirit, engagement, and activities",
+      rating: 4.6,
+      skills: [
+        "Community Building",
+        "Communication",
+        "Event Coordination",
+        "Team Engagement",
+      ],
+      links: {
+        facebook: "https://www.facebook.com/share/16C5uASpSF/",
+        linkedin: "https://www.linkedin.com/in/ali-adel-12008a2b3/",
+      },
+    },
+    {
+      name: "Habiba Mahmoud",
+      role: "Media Head",
+      image: "",
+      about:
+        "Creative media strategist with expertise in brand storytelling and digital content development across multiple platforms",
+      rating: 4.7,
+      skills: [
+        "Media Strategy",
+        "Content Creation",
+        "Brand Management",
+        "Social Media",
+        "Digital Marketing",
+      ],
+      links: {},
+    },
+
+    {
+      name: "Anas Mohamed",
+      role: "Instructor",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/Anas_Img.jpeg?raw=true",
+      about:
+        "Engaging instructor with talent for breaking down complex technical concepts into digestible learning experiences",
+      rating: 4.7,
+      skills: [
+        "Technical Instruction",
+        "Curriculum Development",
+        "Concept Explanation",
+        "Python",
+        "Java",
+      ],
+      links: {
+        linkedin: "https://www.linkedin.com/in/anas-desoky-762715242/",
       },
     },
     {
@@ -136,27 +193,188 @@ const Community = ({ darkMode }) => {
       },
     },
     {
-      name: "Ali Adel",
-      role: "Community Manager",
+      name: "Abdullah Haitham",
+      role: "Mentor",
       image:
-        "https://github.com/Mazen-mo-10/imgs/blob/main/Ali_Img.jpeg?raw=true",
-      about:
-        "Community admin fostering team spirit, engagement, and activities",
-      rating: 4.6,
+        "https://github.com/Mazen-mo-10/imgs/blob/main/abdall.jpeg?raw=true",
+      about: "Advanced-level mentor with strong problem-solving skills",
+      rating: 4.8,
       skills: [
-        "Community Building",
-        "Communication",
-        "Event Coordination",
-        "Team Engagement",
+        "Advanced Algorithms",
+        "Data Structures",
+        "C++",
+        "Python",
+        "Teaching",
       ],
       links: {
-        facebook: "https://www.facebook.com/share/16C5uASpSF/",
-        linkedin: "https://www.linkedin.com/in/ali-adel-12008a2b3/",
+        linkedin: "https://www.linkedin.com/in/abdullah-haitham/",
       },
     },
     {
-      name: "Shady Ibrahim",
+      name: "Enas Ibrahim",
+      role: "Mentor",
+      image: "",
+      about:
+        "Empathetic mentor with talent for creating supportive learning environments and building student confidence",
+      rating: 4.7,
+      skills: [
+        "Student Support",
+        "Confidence Building",
+        "Learning Strategies",
+        "Progress Monitoring",
+        "Python",
+      ],
+      links: {},
+    },
+    {
+      name: "A'laa Khaled",
+      role: "Mentor",
+      image: "",
+      about:
+        "Structured mentor with methodical approach to teaching programming concepts and problem-solving techniques",
+      rating: 4.5,
+      skills: [
+        "Methodical Teaching",
+        "Concept Reinforcement",
+        "Step-by-Step Guidance",
+        "Technical Explanation",
+        "Java",
+      ],
+      links: {},
+    },
+    {
+      name: "Fadwa Mahmoud",
+      role: "Mentor",
+      image: "",
+      about:
+        "Adaptive mentor skilled at tailoring explanations to different learning styles and knowledge levels",
+      rating: 4.6,
+      skills: [
+        "Adaptive Teaching",
+        "Learning Style Assessment",
+        "Differentiated Instruction",
+        "Concept Visualization",
+        "Python",
+      ],
+      links: {},
+    },
+    {
+      name: "Malak Tamer",
+      role: "Mentor",
+      image: "",
+      about:
+        "Encouraging mentor with talent for fostering growth mindset and resilience in programming students",
+      rating: 4.7,
+      skills: [
+        "Growth Mindset Coaching",
+        "Resilience Building",
+        "Positive Reinforcement",
+        "Skill Development",
+        "C++",
+      ],
+      links: {},
+    },
+    {
+      name: "Muhamed Mustafa",
+      role: "Mentor",
+      image: "",
+      about:
+        "Patient and structured mentor with exceptional talent for breaking down complex programming concepts into manageable learning steps",
+      rating: 4.5,
+      skills: [
+        "C++",
+        "Algorithm Design",
+        "Step-by-Step Instruction",
+        "Debugging Techniques",
+        "Code Optimization",
+      ],
+      links: {},
+    },
+    {
+      name: "Hager Alaa",
+      role: "Mentor",
+      image: "",
+      about:
+        "Detail-oriented Java specialist with methodical teaching approach that builds strong foundational programming skills",
+      rating: 4.6,
+      skills: [
+        "Java",
+        "Object-Oriented Programming",
+        "Concept Reinforcement",
+        "Technical Explanation",
+        "Project Guidance",
+      ],
+      links: {},
+    },
+    {
+      name: "Abdelhalim Mohamed",
+      role: "Mentor",
+      image: "",
+      about:
+        "Experienced Java mentor with systematic problem-solving methodology that empowers students to tackle complex challenges",
+      rating: 4.7,
+      skills: [
+        "Java",
+        "Problem-Solving Methodology",
+        "Code Architecture",
+        "Technical Mentoring",
+        "Algorithm Implementation",
+      ],
+      links: {},
+    },
+    {
+      name: "Ziad Ayman",
       role: "Problem Setter",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/Ziad_Img.jpeg?raw=true",
+      about: "Problem setter specializing in high-level challenges",
+      rating: 4.8,
+      skills: [
+        "Algorithms",
+        "Competitive Programming",
+        "C++",
+        "Problem Solving",
+      ],
+      links: {
+        github: "https://github.com/engzooz",
+        linkedin: "https://www.linkedin.com/in/ziad-ayman-8b3899364/",
+      },
+    },
+    {
+      name: "Mai Alaa",
+      role: "Problem setter",
+      image: "",
+      about:
+        "Creative problem setter with exceptional ability to design balanced and intellectually stimulating programming challenges",
+      rating: 4.5,
+      skills: [
+        "Challenge Design",
+        "Test Cases Development",
+        "Problem Balancing",
+        "Logical Thinking",
+        "Java",
+      ],
+      links: {},
+    },
+    {
+      name: "Fadi Nabil",
+      role: "Problem setter",
+      image: "",
+      about:
+        "Detail-oriented problem setter with talent for crafting precise and comprehensive programming problems",
+      rating: 4.6,
+      skills: [
+        "Precision Engineering",
+        "Problem Design",
+        "Quality Assurance",
+        "Debugging",
+        "C++",
+      ],
+      links: {},
+    },
+    {
+      name: "Shady Ibrahim",
+      role: "Mentor and problem setter",
       image:
         "https://github.com/Mazen-mo-10/imgs/blob/main/shady_Img.jpeg?raw=true",
       about:
@@ -179,39 +397,341 @@ const Community = ({ darkMode }) => {
       },
     },
     {
-      name: "Abdullah Haitham",
-      role: "Mentor",
-      image:
-        "https://github.com/Mazen-mo-10/imgs/blob/main/abdall.jpeg?raw=true",
-      about: "Advanced-level mentor with strong problem-solving skills",
-      rating: 4.8,
+      name: "George Ayman",
+      role: "Mentor and problem setter",
+      image: "",
+      about:
+        "Dual-role expert who excels at both creating challenging problems and mentoring students through solution approaches",
+      rating: 4.7,
       skills: [
-        "Advanced Algorithms",
-        "Data Structures",
-        "C++",
+        "Solution Guidance",
+        "Problem Creation",
+        "Algorithm Analysis",
+        "Student Assessment",
         "Python",
-        "Teaching",
       ],
-      links: {
-        linkedin: "https://www.linkedin.com/in/abdullah-haitham/",
-      },
+      links: {},
+    },
+    {
+      name: "Rimas Serage",
+      role: "HR",
+      image: "",
+      about:
+        "Dedicated HR professional with strong interpersonal skills and talent for fostering positive organizational culture",
+      rating: 4.4,
+      skills: [
+        "Employee Relations",
+        "Culture Development",
+        "Recruitment",
+        "Interpersonal Communication",
+        "Team Support",
+      ],
+      links: {},
+    },
+    {
+      name: "Jena Ayman",
+      role: "HR",
+      image: "",
+      about:
+        "Organized HR specialist with excellent administrative skills and attention to detail in personnel management",
+      rating: 4.5,
+      skills: [
+        "Administrative Efficiency",
+        "Detail Orientation",
+        "Record Management",
+        "Policy Implementation",
+        "Coordination",
+      ],
+      links: {},
+    },
+    {
+      name: "Basmala Mohie",
+      role: "HR",
+      image: "",
+      about:
+        "People-focused HR professional with exceptional empathy and conflict resolution abilities",
+      rating: 4.6,
+      skills: [
+        "Conflict Resolution",
+        "Empathetic Communication",
+        "Team Integration",
+        "Moral Support",
+        "Mediation",
+      ],
+      links: {},
+    },
+    {
+      name: "Basmala Rady",
+      role: "HR",
+      image: "",
+      about:
+        "Proactive HR coordinator with talent for identifying organizational needs and implementing effective solutions",
+      rating: 4.5,
+      skills: [
+        "Needs Assessment",
+        "Solution Implementation",
+        "Proactive Support",
+        "Resource Coordination",
+        "Process Improvement",
+      ],
+      links: {},
+    },
+    {
+      name: "Ziad Muhammad",
+      role: "HR",
+      image: "",
+      about:
+        "Analytical HR professional with strong problem-solving skills and systematic approach to personnel management",
+      rating: 4.4,
+      skills: [
+        "Problem Analysis",
+        "Systematic Approach",
+        "Data Management",
+        "Procedure Development",
+        "Efficiency Optimization",
+      ],
+      links: {},
+    },
+    {
+      name: "Tasneem Amer",
+      role: "HR",
+      image: "",
+      about:
+        "Energetic HR specialist with excellent communication skills and talent for employee engagement initiatives",
+      rating: 4.6,
+      skills: [
+        "Employee Engagement",
+        "Effective Communication",
+        "Initiative Planning",
+        "Team Motivation",
+        "Activity Coordination",
+      ],
+      links: {},
+    },
+    {
+      name: "Salma Amer",
+      role: "HR",
+      image: "",
+      about:
+        "Diligent HR coordinator with strong organizational skills and commitment to maintaining harmonious workplace environment",
+      rating: 4.5,
+      skills: [
+        "Workplace Harmony",
+        "Organizational Skills",
+        "Diligent Execution",
+        "Environment Maintenance",
+        "Support Services",
+      ],
+      links: {},
+    },
+    {
+      name: "Hader Gamal",
+      role: "HR",
+      image: "",
+      about:
+        "Committed HR professional with focus on developmental support and continuous improvement of team capabilities",
+      rating: 4.4,
+      skills: [
+        "Developmental Support",
+        "Capability Building",
+        "Continuous Improvement",
+        "Skill Assessment",
+        "Training Assistance",
+      ],
+      links: {},
+    },
+    {
+      name: "Waseem Ashraf",
+      role: "Vice head media",
+      image: "",
+      about:
+        "Strategic media deputy with strong visual storytelling skills and expertise in multi-platform content distribution",
+      rating: 4.6,
+      skills: [
+        "Visual Storytelling",
+        "Content Distribution",
+        "Platform Management",
+        "Brand Consistency",
+        "Campaign Execution",
+      ],
+      links: {},
+    },
+    {
+      name: "Lama Waleed",
+      role: "Content writer",
+      image: "",
+      about:
+        "Creative content writer with engaging narrative style and talent for crafting compelling organizational stories",
+      rating: 4.7,
+      skills: [
+        "Narrative Writing",
+        "Content Creation",
+        "Story Development",
+        "Engaging Messaging",
+        "Creative Expression",
+      ],
+      links: {},
+    },
+    {
+      name: "Omnia Shady",
+      role: "Content writer",
+      image: "",
+      about:
+        "Versatile content creator with adaptability across different media formats and audience targeting",
+      rating: 4.5,
+      skills: [
+        "Adaptable Writing",
+        "Audience Targeting",
+        "Format Versatility",
+        "Message Tailoring",
+        "Content Adaptation",
+      ],
+      links: {},
+    },
+    {
+      name: "Shahd Ali",
+      role: "Content writer",
+      image: "",
+      about:
+        "Precise content developer with excellent research skills and attention to factual accuracy in communications",
+      rating: 4.6,
+      skills: [
+        "Research Skills",
+        "Factual Accuracy",
+        "Precision Writing",
+        "Information Verification",
+        "Clear Communication",
+      ],
+      links: {},
+    },
+    {
+      name: "Marina Amir",
+      role: "Video Editor",
+      image: "",
+      about:
+        "Creative storyteller with exceptional ability to transform technical concepts into engaging and accessible content",
+      rating: 4.7,
+      skills: [
+        "Technical Writing",
+        "Brand Storytelling",
+        "Content Strategy",
+        "Audience Engagement",
+        "Creative Messaging",
+      ],
+      links: {},
+    },
+    {
+      name: "Ahmed Gamal",
+      role: "Vice head organiser",
+      image: "",
+      about:
+        "Efficient organizational deputy with strong logistical planning skills and attention to operational details",
+      rating: 4.7,
+      skills: [
+        "Logistical Planning",
+        "Operational Detail",
+        "Efficiency Management",
+        "Coordination",
+        "Resource Allocation",
+      ],
+      links: {},
+    },
+    {
+      name: "Hajar Ahmed",
+      role: "Organizers Head",
+      image: "",
+      about:
+        "Exceptional event coordinator with meticulous planning skills and talent for executing flawless organizational operations",
+      rating: 4.7,
+      skills: [
+        "Event Planning",
+        "Logistics Management",
+        "Team Coordination",
+        "Budget Management",
+        "Timeline Execution",
+      ],
+      links: {},
+    },
+    {
+      name: "Aya Mahmoud",
+      role: "Organizer",
+      image: "",
+      about:
+        "Meticulous event organizer with exceptional planning capabilities and talent for anticipating logistical needs",
+      rating: 4.6,
+      skills: [
+        "Event Planning",
+        "Logistical Anticipation",
+        "Detail Management",
+        "Schedule Coordination",
+        "Preparation",
+      ],
+      links: {},
+    },
+    {
+      name: "Menna Maher",
+      role: "Organizer",
+      image: "",
+      about:
+        "Dynamic organizer with strong execution skills and ability to manage multiple tasks simultaneously under pressure",
+      rating: 4.5,
+      skills: [
+        "Multi-Tasking",
+        "Pressure Management",
+        "Execution Excellence",
+        "Task Coordination",
+        "Adaptive Planning",
+      ],
+      links: {},
+    },
+    {
+      name: "Jomana",
+      role: "Organizer",
+      image: "",
+      about:
+        "Resourceful organizing professional with creative problem-solving skills for unexpected challenges",
+      rating: 4.6,
+      skills: [
+        "Resourcefulness",
+        "Creative Solutions",
+        "Challenge Response",
+        "Improvisation",
+        "Situation Management",
+      ],
+      links: {},
+    },
+    {
+      name: "Roaa Muhammed",
+      role: "Organizer",
+      image: "",
+      about:
+        "Proactive organizer with exceptional adaptability and talent for developing innovative solutions to logistical challenges",
+      rating: 4.6,
+      skills: [
+        "Event Logistics",
+        "Problem Prevention",
+        "Adaptive Planning",
+        "Crisis Management",
+        "Multi-Tasking",
+      ],
+      links: {},
     },
   ];
 
   // Community stats
   const communityStats = {
-    totalMembers: 287,
-    activeThisWeek: 143,
-    problemsSolved: 15640,
-    contestsParticipated: 342,
+    totalMembers: 41,
+    activeThisWeek: 0,
+    problemsSolved: 0,
+    contestsParticipated: 0,
   };
 
   // Filter members based on search and role filter
   const filteredMembers = teamMembers.filter((member) => {
     const matchesSearch =
       member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      member.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      member.about.toLowerCase().includes(searchTerm.toLowerCase());
+      member.role.toLowerCase().includes(searchTerm.toLowerCase());
+    // || member.about.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesRole =
       filterRole === "all" ||
       member.role.toLowerCase() === filterRole.toLowerCase();

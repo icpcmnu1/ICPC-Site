@@ -1,5 +1,12 @@
 import React from "react";
-import { Code, Github, Facebook, Instagram, Linkedin } from "lucide-react";
+import {
+  Code,
+  Github,
+  Facebook,
+  Instagram,
+  Linkedin,
+  MessageCircle,
+} from "lucide-react";
 
 const Footer = ({ darkMode, setCurrentPage }) => {
   return (
@@ -10,12 +17,13 @@ const Footer = ({ darkMode, setCurrentPage }) => {
     >
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-3 gap-8">
-          <div>
+          <div className="flex flex-col gap-4">
+            {/* Logo */}
             <div
               className="flex items-center gap-2 cursor-pointer"
               onClick={() => setCurrentPage("home")}
             >
-              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center overflow-hidden">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center overflow-hidden transition-transform duration-300 hover:scale-110">
                 <img
                   src="https://github.com/Mazen-mo-10/imgs/blob/main/icon_Com.jpg?raw=true"
                   alt="ICPC MNU Logo"
@@ -26,6 +34,8 @@ const Footer = ({ darkMode, setCurrentPage }) => {
                 ICPC MNU
               </span>
             </div>
+
+            {/* Text */}
             <p
               className={`text-sm ${
                 darkMode ? "text-gray-400" : "text-gray-600"
@@ -57,10 +67,10 @@ const Footer = ({ darkMode, setCurrentPage }) => {
                 <button
                   key={item}
                   onClick={() => setCurrentPage(item.toLowerCase())}
-                  className={`block text-sm transition-colors ${
+                  className={`block text-sm transition-all duration-300 ${
                     darkMode
-                      ? "text-gray-400 hover:text-white"
-                      : "text-gray-600 hover:text-gray-900"
+                      ? "text-gray-400 hover:text-blue-400"
+                      : "text-gray-600 hover:text-blue-500"
                   }`}
                 >
                   {item}
@@ -94,6 +104,11 @@ const Footer = ({ darkMode, setCurrentPage }) => {
                   icon: Linkedin,
                   href: "https://www.linkedin.com/company/icpc-mnu-community/posts/?feedView=all",
                   color: "blue",
+                },
+                {
+                  icon: MessageCircle,
+                  href: "https://whatsapp.com/channel/0029Vb5vctoLo4hgPJnL743T",
+                  color: "green",
                 },
               ].map((social, index) => (
                 <a

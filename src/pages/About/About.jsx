@@ -48,7 +48,7 @@ const About = ({ darkMode }) => {
               year: "2023",
               title: "Community Growth",
               content:
-                "Reached 280+ members and established our structured training program with dedicated mentors.",
+                "Reached 130+ members and established our structured training program with dedicated mentors.",
               icon: <Users className="w-6 h-6" />,
             },
             {
@@ -105,7 +105,7 @@ const About = ({ darkMode }) => {
             </span>
           </h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {divisions.map((division, index) => (
               <div
                 key={index}

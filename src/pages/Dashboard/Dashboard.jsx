@@ -1,240 +1,618 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
-  Users,
   Trophy,
-  TrendingUp,
-  Target,
-  Award,
-  Calendar,
-  Star,
-  ChevronRight,
-  BarChart3,
-  BookOpen,
-  Code,
   Crown,
   Medal,
-  Zap,
-  Heart,
-  Clock,
+  Users,
+  Code,
+  ChevronUp,
+  ChevronDown,
+  Search,
+  TrendingUp as TrendingUpIcon,
+  Clock as ClockIcon,
+  Target,
+  Award,
+  BookOpen,
   CheckCircle,
-  ArrowRight,
-  Sparkles,
+  Calendar,
+  TrendingUp,
+  Clock,
 } from "lucide-react";
+import { initialTrainees } from "../../data/trainees";
+import { communityGoals, communityProgress } from "../../data/communityData";
+import { roadmapData } from "../../data/roadmapData";
 
 const Dashboard = ({ darkMode }) => {
-  const [activeTab, setActiveTab] = useState("progress");
+  const [activeTab, setActiveTab] = useState("leaderboard");
+  const [leaderboard, setLeaderboard] = useState([]);
+  const [searchTerm, SetSearchTerm] = useState("");
+  const [sortBy, setSortBy] = useState("solved");
+  //const [isUpdating, SetIsUpdating] = useState(false);
   const [hoveredStat, setHoveredStat] = useState(null);
 
-  // Community future goals and targets
-  const [communityGoals] = useState({
-    targetMembers: 1000,
-    targetProblems: 30000,
-    targetContests: 500,
-    targetActivePercentage: 70,
-    levelGoals: [300, 150, 100],
-  });
-
-  // Progress toward goals
-  const [communityProgress] = useState({
-    currentMembers: 287,
-    currentProblems: 15640,
-    currentContests: 342,
-    currentActivePercentage: 50,
-    currentLevels: [200, 30, 4],
-  });
-
-  // Roadmap for the community
-  const [roadmapData] = useState([
-    {
-      title: "Level 1: Beginners",
-      color: "from-blue-400 to-cyan-400",
-      icon: "🚀",
-      goals: [
-        "Learn basic syntax",
-        "Solve 100 problems",
-        "Participate in 5 contests",
-      ],
-      duration: "4-6 weeks",
-      resources: 12,
-    },
-    {
-      title: "Level 2: Intermediate",
-      color: "from-purple-400 to-pink-400",
-      icon: "⚡",
-      goals: [
-        "Master data structures",
-        "Solve 300 problems",
-        "Reach 1600 rating",
-      ],
-      duration: "8-10 weeks",
-      resources: 18,
-    },
-    {
-      title: "Level 3: Advanced",
-      color: "from-orange-400 to-red-400",
-      icon: "🔥",
-      goals: ["Compete nationally", "Mentor others", "Achieve 2000+ rating"],
-      duration: "10-12 weeks",
-      resources: 24,
-    },
-  ]);
-
-  // Upcoming initiatives
-  const [initiatives] = useState([
-    {
-      title: "Mentorship Program",
-      description: "Pairing beginners with experienced coders",
-      timeline: "Q1 2024",
-      progress: 30,
-      icon: <Heart className="text-pink-500" />,
-    },
-    {
-      title: "Weekly Contests",
-      description: "Regular coding challenges with prizes",
-      timeline: "Ongoing",
-      progress: 75,
-      icon: <Trophy className="text-yellow-500" />,
-    },
-    {
-      title: "Workshop Series",
-      description: "Deep dives into algorithms and data structures",
-      timeline: "Q2 2024",
-      progress: 10,
-      icon: <BookOpen className="text-blue-500" />,
-    },
-    {
-      title: "Interview Preparation",
-      description: "Technical interview practice sessions",
-      timeline: "Q3 2024",
-      progress: 5,
-      icon: <Zap className="text-orange-500" />,
-    },
-  ]);
-
-  // Calculate progress percentages
-  const progressPercentages = {
-    members: Math.round(
-      (communityProgress.currentMembers / communityGoals.targetMembers) * 100
-    ),
-    problems: Math.round(
-      (communityProgress.currentProblems / communityGoals.targetProblems) * 100
-    ),
-    contests: Math.round(
-      (communityProgress.currentContests / communityGoals.targetContests) * 100
-    ),
-    active: Math.round(
-      (communityProgress.currentActivePercentage /
-        communityGoals.targetActivePercentage) *
-        100
-    ),
-  };
-
-  // Stats with improved icons
+  // Add these before your Dashboard component
   const stats = [
     {
-      label: "Total Members",
+      label: "Community Members",
       current: communityProgress.currentMembers,
       target: communityGoals.targetMembers,
-      progress: progressPercentages.members,
-      color: "bg-blue-500",
+      progress: Math.round(
+        (communityProgress.currentMembers / communityGoals.targetMembers) * 100
+      ),
       icon: <Users className="w-5 h-5 text-blue-500" />,
-      hoverIcon: <Users className="w-6 h-6 text-white" />,
+      hoverIcon: <Users className="w-5 h-5 text-white" />,
+      color: "bg-gradient-to-r from-blue-500 to-cyan-500",
     },
     {
       label: "Problems Solved",
       current: communityProgress.currentProblems,
       target: communityGoals.targetProblems,
-      progress: progressPercentages.problems,
-      color: "bg-purple-500",
-      icon: <Code className="w-5 h-5 text-purple-500" />,
-      hoverIcon: <Code className="w-6 h-6 text-white" />,
+      progress: Math.round(
+        (communityProgress.currentProblems / communityGoals.targetProblems) *
+          100
+      ),
+      icon: <Code className="w-5 h-5 text-green-500" />,
+      hoverIcon: <Code className="w-5 h-5 text-white" />,
+      color: "bg-gradient-to-r from-green-500 to-emerald-500",
     },
     {
       label: "Contests Participated",
       current: communityProgress.currentContests,
       target: communityGoals.targetContests,
-      progress: progressPercentages.contests,
-      color: "bg-green-500",
-      icon: <Trophy className="w-5 h-5 text-green-500" />,
-      hoverIcon: <Trophy className="w-6 h-6 text-white" />,
+      progress: Math.round(
+        (communityProgress.currentContests / communityGoals.targetContests) *
+          100
+      ),
+      icon: <Trophy className="w-5 h-5 text-amber-500" />,
+      hoverIcon: <Trophy className="w-5 h-5 text-white" />,
+      color: "bg-gradient-to-r from-amber-500 to-orange-500",
     },
     {
-      label: "Active Members",
-      current: `${communityProgress.currentActivePercentage}%`,
-      target: `${communityGoals.targetActivePercentage}%`,
-      progress: progressPercentages.active,
-      color: "bg-orange-500",
-      icon: <TrendingUp className="w-5 h-5 text-orange-500" />,
-      hoverIcon: <TrendingUp className="w-6 h-6 text-white" />,
+      label: "Active Participation",
+      current: communityProgress.currentActivePercentage,
+      target: communityGoals.targetActivePercentage,
+      progress: Math.round(
+        (communityProgress.currentActivePercentage /
+          communityGoals.targetActivePercentage) *
+          100
+      ),
+      icon: <TrendingUpIcon className="w-5 h-5 text-purple-500" />,
+      hoverIcon: <TrendingUpIcon className="w-5 h-5 text-white" />,
+      color: "bg-gradient-to-r from-purple-500 to-pink-500",
     },
   ];
 
+  const initiatives = [
+    {
+      title: "Weekly Coding Challenges",
+      description: "Regular practice sessions with increasing difficulty",
+      timeline: "Ongoing",
+      progress: 75,
+      icon: <Code className="w-5 h-5 text-blue-500" />,
+    },
+    {
+      title: "Mentorship Program",
+      description: "Pairing experienced members with beginners",
+      timeline: "Q2 2024",
+      progress: 30,
+      icon: <Users className="w-5 h-5 text-green-500" />,
+    },
+    {
+      title: "Hackathon Event",
+      description: "24-hour coding competition with prizes",
+      timeline: "Q3 2024",
+      progress: 15,
+      icon: <Trophy className="w-5 h-5 text-amber-500" />,
+    },
+    {
+      title: "Algorithm Workshop Series",
+      description: "Deep dive into advanced algorithms",
+      timeline: "Q4 2024",
+      progress: 5,
+      icon: <BookOpen className="w-5 h-5 text-purple-500" />,
+    },
+  ];
+  // Initialize and sort leaderboard
+  useEffect(() => {
+    const sortedTrainees = [...initialTrainees].sort(
+      (a, b) => b.solved - a.solved
+    );
+    setLeaderboard(sortedTrainees);
+  }, []);
+
+  // Handle sorting
+  const handleSort = useCallback(
+    (field) => {
+      if (sortBy === field) {
+        setLeaderboard((prev) => [...prev].reverse());
+      } else {
+        const sorted = [...leaderboard].sort((a, b) => b[field] - a[field]);
+        setLeaderboard(sorted);
+        setSortBy(field);
+      }
+    },
+    [sortBy, leaderboard]
+  );
+
+  // Filter leaderboard based on search term
+  const filteredLeaderboard = leaderboard.filter((trainee) =>
+    trainee.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Function to update solved problems randomly (for simulation)
+  // const updateRandomTrainee = useCallback(() => {
+  //   setIsUpdating(true);
+
+  //   setLeaderboard((prev) => {
+  //     const updated = [...prev];
+
+  //     // Select 2-3 random trainees to update
+  //     const numUpdates = Math.floor(Math.random() * 2) + 2;
+  //     const updatedIndices = new Set();
+
+  //     while (updatedIndices.size < numUpdates) {
+  //       updatedIndices.add(Math.floor(Math.random() * updated.length));
+  //     }
+
+  //     updatedIndices.forEach((index) => {
+  //       const randomIncrement = Math.floor(Math.random() * 5) + 1;
+  //       updated[index] = {
+  //         ...updated[index],
+  //         solved: updated[index].solved + randomIncrement,
+  //       };
+  //     });
+
+  //     // Re-sort after update and update trends
+  //     const sorted = updated.sort((a, b) => b.solved - a.solved);
+
+  //     // Update trends based on rank changes
+  //     return sorted.map((trainee, newIndex) => {
+  //       const oldIndex = prev.findIndex((t) => t.id === trainee.id);
+  //       return {
+  //         ...trainee,
+  //         trend:
+  //           newIndex < oldIndex ? "up" : newIndex > oldIndex ? "down" : "same",
+  //       };
+  //     });
+  //   });
+
+  //   setTimeout(() => setIsUpdating(false), 500);
+  // }, []);
+
+  // Simulate real-time updates (for demonstration)
+  // useEffect(() => {
+  //   const interval = setInterval(updateRandomTrainee, 8000);
+  //   return () => clearInterval(interval);
+  // }, [updateRandomTrainee]);
+
+  // Get medal and crown based on current rank
+  const getRankBadge = useCallback((rank) => {
+    if (rank === 0)
+      return {
+        medal: "🥇",
+        crown: true,
+        color: "from-amber-400 to-amber-600",
+        bgColor: "bg-amber-500",
+      };
+    if (rank === 1)
+      return {
+        medal: "🥈",
+        crown: false,
+        color: "from-gray-400 to-gray-600",
+        bgColor: "bg-gray-500",
+      };
+    if (rank === 2)
+      return {
+        medal: "🥉",
+        crown: false,
+        color: "from-orange-400 to-orange-600",
+        bgColor: "bg-orange-500",
+      };
+    return { medal: null, crown: false, color: "", bgColor: "" };
+  }, []);
+
+  // Podium component for top 3
+  const Podium = ({ trainees }) => (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      {trainees.map((trainee, index) => {
+        const { medal, crown, color, bgColor } = getRankBadge(index);
+        const height = index === 0 ? "h-72" : index === 1 ? "h-64" : "h-60";
+
+        return (
+          <div
+            key={trainee.id}
+            className={`relative rounded-2xl bg-gradient-to-b ${color} text-white 
+            transition-all duration-500 hover:scale-105 transform shadow-2xl ${height} 
+            flex flex-col justify-end overflow-hidden group`}
+          >
+            {/* Animated background elements */}
+            <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-500">
+              <div className="absolute top-2 left-2 text-4xl">{"{ }"}</div>
+              <div className="absolute bottom-4 right-4 text-3xl">
+                &#60;/&#62;
+              </div>
+            </div>
+
+            {crown && (
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <Crown className="w-10 h-10 text-amber-300 filter drop-shadow-md" />
+              </div>
+            )}
+
+            <div className="absolute top-4 right-4">
+              <div
+                className={`w-10 h-10 rounded-full flex items-center justify-center ${bgColor} text-white font-bold text-lg shadow-md`}
+              >
+                #{index + 1}
+              </div>
+            </div>
+
+            <div className="flex justify-center mb-4">
+              <div className="relative">
+                <img
+                  src={trainee.avatar}
+                  alt={trainee.name}
+                  className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-xl transform group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute -bottom-2 -right-2 bg-green-500 rounded-full p-1 shadow-md">
+                  <div className="w-6 h-6 flex items-center justify-center bg-white rounded-full">
+                    <TrendingUpIcon className="w-4 h-4 text-green-600" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-center px-4 mb-6">
+              <h3 className="font-bold text-xl mb-2 truncate">
+                {trainee.name}
+              </h3>
+              <div className="flex items-center justify-center space-x-2">
+                <div className="text-4xl font-extrabold">{trainee.solved}</div>
+                <span className="text-sm opacity-90">solved</span>
+              </div>
+              <div className="flex items-center justify-center text-sm mt-2 opacity-90">
+                <ClockIcon className="w-4 h-4 mr-1" />
+                <span>{trainee.time}</span>
+              </div>
+            </div>
+
+            <div className="absolute bottom-0 left-0 right-0 h-2 bg-black bg-opacity-20"></div>
+
+            <div className="absolute top-4 left-4 text-3xl">{medal}</div>
+          </div>
+        );
+      })}
+    </div>
+  );
+
+  // Leaderboard table row component
+  const LeaderboardRow = ({ trainee, rank }) => (
+    <tr
+      className={`border-b ${
+        darkMode
+          ? "border-gray-700 hover:bg-gray-700"
+          : "border-gray-200 hover:bg-gray-50"
+      } transition-colors duration-200 group`}
+    >
+      <td className="px-6 py-4 font-medium">
+        <div className="flex items-center">
+          <span className="text-lg">#{rank + 1}</span>
+          {rank < 3 && (
+            <span className="ml-2 text-xl">
+              {rank === 0 ? "🥇" : rank === 1 ? "🥈" : "🥉"}
+            </span>
+          )}
+        </div>
+      </td>
+      <td className="px-6 py-4">
+        <div className="flex items-center">
+          <img
+            src={trainee.avatar}
+            alt={trainee.name}
+            className="w-12 h-12 rounded-full object-cover mr-4 shadow-md group-hover:shadow-lg transition-shadow duration-200"
+          />
+          <span className="font-medium">{trainee.name}</span>
+        </div>
+      </td>
+      <td className="px-6 py-4 font-semibold text-lg">{trainee.solved}</td>
+      <td className="px-6 py-4">{trainee.time}</td>
+      <td className="px-6 py-4">
+        {trainee.trend === "up" ? (
+          <div className="text-green-500 flex items-center animate-pulse">
+            <ChevronUp className="w-5 h-5 mr-1" />
+            <span>Up</span>
+          </div>
+        ) : trainee.trend === "down" ? (
+          <div className="text-red-500 flex items-center">
+            <ChevronDown className="w-5 h-5 mr-1" />
+            <span>Down</span>
+          </div>
+        ) : (
+          <div className="text-gray-500 flex items-center">
+            <span>-</span>
+          </div>
+        )}
+      </td>
+    </tr>
+  );
+
   return (
     <div
-      className={`min-h-screen py-20 px-6 pt-24 ${
-        darkMode ? "bg-gray-900" : "bg-gray-50"
+      className={`min-h-screen py-12 px-4 pt-20 ${
+        darkMode
+          ? "bg-gradient-to-br from-gray-900 to-gray-800"
+          : "bg-gradient-to-br from-blue-50 to-purple-50"
       }`}
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12 w-full">
+        <div className="text-center mb-12">
           <h1
             className={`text-5xl font-bold mb-6 ${
               darkMode ? "text-white" : "text-gray-900"
             }`}
           >
             <span className="bg-gradient-to-r from-purple-500 to-pink-600 bg-clip-text text-transparent">
-              Community
+              Contest
             </span>{" "}
-            Progress Dashboard
+            <span className="bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent">
+              Champions
+            </span>
           </h1>
           <p
             className={`text-xl max-w-2xl mx-auto ${
               darkMode ? "text-gray-400" : "text-gray-600"
             }`}
           >
-            Tracking our journey toward becoming a top competitive programming
-            community
+            Elite competitive programmers showcasing their algorithmic mastery
           </p>
         </div>
 
         {/* Tabs */}
-        <div className="flex border-b mb-8 w-full">
-          {[
-            {
-              id: "progress",
-              name: "Our Progress",
-              icon: <TrendingUp size={18} />,
-            },
-            {
-              id: "goals",
-              name: "Future Goals",
-              icon: <Target size={18} />,
-            },
-            {
-              id: "roadmap",
-              name: "Learning Path",
-              icon: <BookOpen size={18} />,
-            },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-4 py-3 font-medium border-b-2 transition-all ${
-                activeTab === tab.id
-                  ? darkMode
-                    ? "border-purple-500 text-purple-400"
-                    : "border-purple-600 text-purple-600"
-                  : darkMode
-                  ? "border-transparent text-gray-400 hover:text-gray-300"
-                  : "border-transparent text-gray-500 hover:text-gray-700"
-              }`}
-            >
-              {tab.icon}
-              {tab.name}
-            </button>
-          ))}
+        <div className="flex justify-center mb-10">
+          <div
+            className={`inline-flex rounded-2xl p-1 ${
+              darkMode ? "bg-gray-800" : "bg-white shadow-md"
+            }`}
+          >
+            {[
+              {
+                id: "leaderboard",
+                name: "Leaderboard",
+                icon: <Trophy size={18} />,
+              },
+              {
+                id: "progress",
+                name: "Our Progress",
+                icon: <TrendingUpIcon size={18} />,
+              },
+              { id: "goals", name: "Future Goals", icon: <Medal size={18} /> },
+              {
+                id: "roadmap",
+                name: "Learning Path",
+                icon: <Users size={18} />,
+              },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center gap-2 px-6 py-3 font-medium rounded-xl transition-all ${
+                  activeTab === tab.id
+                    ? darkMode
+                      ? "bg-purple-600 text-white shadow-lg"
+                      : "bg-gradient-to-r from-purple-500 to-pink-600 text-white shadow-lg"
+                    : darkMode
+                    ? "text-gray-400 hover:text-gray-300"
+                    : "text-gray-500 hover:text-gray-700"
+                }`}
+              >
+                {tab.icon}
+                {tab.name}
+              </button>
+            ))}
+          </div>
         </div>
+
+        {/* Leaderboard Tab */}
+        {activeTab === "leaderboard" && (
+          <div className="space-y-8">
+            {/* Summary Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div
+                className={`p-6 rounded-2xl shadow-lg ${
+                  darkMode ? "bg-gray-800" : "bg-white"
+                } transition-transform duration-300 hover:scale-[1.02] border-2 border-transparent hover:border-purple-300`}
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3
+                      className={`text-lg font-semibold ${
+                        darkMode ? "text-gray-300" : "text-gray-600"
+                      }`}
+                    >
+                      Total Participants
+                    </h3>
+                    <p
+                      className={`text-3xl font-bold mt-2 ${
+                        darkMode ? "text-white" : "text-gray-900"
+                      }`}
+                    >
+                      0
+                    </p>
+                  </div>
+                  <div className="p-3 bg-blue-100 rounded-full">
+                    <Users className="w-8 h-8 text-blue-600" />
+                  </div>
+                </div>
+                <p
+                  className={`text-sm mt-4 ${
+                    darkMode ? "text-gray-400" : "text-gray-600"
+                  }`}
+                >
+                  Active competitive programmers
+                </p>
+              </div>
+
+              <div
+                className={`p-6 rounded-2xl shadow-lg ${
+                  darkMode ? "bg-gray-800" : "bg-white"
+                } transition-transform duration-300 hover:scale-[1.02] border-2 border-transparent hover:border-amber-300`}
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3
+                      className={`text-lg font-semibold ${
+                        darkMode ? "text-gray-300" : "text-gray-600"
+                      }`}
+                    >
+                      Top Problem Solver
+                    </h3>
+                    <p
+                      className={`text-xl font-bold mt-2 ${
+                        darkMode ? "text-white" : "text-gray-900"
+                      }`}
+                    >
+                      {leaderboard[0]?.name || "No data"}
+                    </p>
+                    <p
+                      className={`text-sm ${
+                        darkMode ? "text-gray-400" : "text-gray-600"
+                      }`}
+                    >
+                      {leaderboard[0]?.solved || 0} problems solved
+                    </p>
+                  </div>
+                  <div className="p-3 bg-amber-100 rounded-full">
+                    <Crown className="w-8 h-8 text-amber-600" />
+                  </div>
+                </div>
+                <div className="flex items-center mt-4">
+                  <span className="text-xs bg-gradient-to-r from-amber-400 to-amber-600 text-white px-2 py-1 rounded-full">
+                    🏆 Current Champion
+                  </span>
+                </div>
+              </div>
+
+              <div
+                className={`p-6 rounded-2xl shadow-lg ${
+                  darkMode ? "bg-gray-800" : "bg-white"
+                } transition-transform duration-300 hover:scale-[1.02] border-2 border-transparent hover:border-green-300`}
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3
+                      className={`text-lg font-semibold ${
+                        darkMode ? "text-gray-300" : "text-gray-600"
+                      }`}
+                    >
+                      Total Problems Solved
+                    </h3>
+                    <p
+                      className={`text-3xl font-bold mt-2 ${
+                        darkMode ? "text-white" : "text-gray-900"
+                      }`}
+                    >
+                      0
+                    </p>
+                  </div>
+                  <div className="p-3 bg-green-100 rounded-full">
+                    <Code className="w-8 h-8 text-green-600" />
+                  </div>
+                </div>
+                <p
+                  className={`text-sm mt-4 ${
+                    darkMode ? "text-gray-400" : "text-gray-600"
+                  }`}
+                >
+                  By all participants
+                </p>
+              </div>
+            </div>
+
+            {/* Leaderboard */}
+            <div
+              className={`p-8 rounded-2xl shadow-lg ${
+                darkMode ? "bg-gray-800" : "bg-white"
+              } w-full`}
+            >
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+                <h2
+                  className={`text-2xl font-bold flex items-center gap-3 ${
+                    darkMode ? "text-white" : "text-gray-900"
+                  }`}
+                >
+                  <Trophy className="text-amber-500" />
+                  Competition Leaderboard
+                </h2>
+              </div>
+
+              {/* Podium for top 3 */}
+              <Podium trainees={filteredLeaderboard.slice(0, 3)} />
+
+              {/* Complete Rankings */}
+              <h3
+                className={`text-xl font-semibold mb-6 flex items-center gap-2 ${
+                  darkMode ? "text-white" : "text-gray-900"
+                }`}
+              >
+                <Medal className="text-amber-500" />
+                Complete Rankings
+              </h3>
+
+              {/* Leaderboard table */}
+              <div className="overflow-x-auto rounded-2xl shadow-inner">
+                <table className="w-full">
+                  <thead>
+                    <tr
+                      className={`${
+                        darkMode ? "bg-gray-700" : "bg-gray-100"
+                      } text-left`}
+                    >
+                      <th className="px-6 py-4">Rank</th>
+                      <th className="px-6 py-4">Participant</th>
+                      <th
+                        className="px-6 py-4 cursor-pointer"
+                        onClick={() => handleSort("solved")}
+                      >
+                        <div className="flex items-center">
+                          <span>Solved</span>
+                          {sortBy === "solved" && (
+                            <ChevronDown className="w-4 h-4 ml-1" />
+                          )}
+                        </div>
+                      </th>
+                      <th className="px-6 py-4">Time</th>
+                      <th className="px-6 py-4">Trend</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredLeaderboard.slice(3, 10).map((trainee, index) => (
+                      <LeaderboardRow
+                        key={trainee.id}
+                        trainee={trainee}
+                        rank={index + 3}
+                      />
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {filteredLeaderboard.length === 0 && (
+                <div
+                  className={`text-center py-12 ${
+                    darkMode ? "text-gray-400" : "text-gray-600"
+                  }`}
+                >
+                  <div className="text-6xl mb-4">🔍</div>
+                  <h3 className="text-xl font-semibold mb-2">
+                    No participants found
+                  </h3>
+                  <p>Try adjusting your search criteria</p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Progress Overview */}
         {activeTab === "progress" && (
@@ -477,7 +855,7 @@ const Dashboard = ({ darkMode }) => {
           </div>
         )}
 
-        {/* Future Goals */}
+        {/* Future Goals Tab */}
         {activeTab === "goals" && (
           <div
             className={`p-6 rounded-2xl shadow-lg ${
@@ -573,21 +951,21 @@ const Dashboard = ({ darkMode }) => {
                   {[
                     {
                       icon: <Code className="text-purple-500" />,
-                      title: "30,000 Problems Solved",
+                      title: "3,000 Problems Solved",
                       description:
-                        "Collectively solve over 30,000 programming problems",
+                        "Collectively solve over 3,000 programming problems",
                     },
                     {
                       icon: <Award className="text-red-500" />,
-                      title: "500+ Contests",
+                      title: "50+ Contests",
                       description:
-                        "Participate in over 500 contests across all platforms",
+                        "Participate in over 50 contests across all platforms",
                     },
                     {
                       icon: <Crown className="text-orange-500" />,
                       title: "10+ Rated Members",
                       description:
-                        "Have at least 10 members with 2000+ rating on competitive platforms",
+                        "Have at least 10 members with 1000+ rating on competitive platforms",
                     },
                   ].map((goal, idx) => (
                     <div
@@ -655,7 +1033,7 @@ const Dashboard = ({ darkMode }) => {
           </div>
         )}
 
-        {/* Learning Path */}
+        {/* Learning Path Tab */}
         {activeTab === "roadmap" && (
           <div
             className={`p-6 rounded-2xl shadow-lg ${
@@ -707,7 +1085,7 @@ const Dashboard = ({ darkMode }) => {
                             darkMode ? "text-gray-400" : "text-gray-600"
                           }`}
                         >
-                          <Clock className="w-4 h-4" />
+                          <ClockIcon className="w-4 h-4" />
                           {level.duration}
                         </span>
                         <span

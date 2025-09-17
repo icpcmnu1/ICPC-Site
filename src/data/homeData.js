@@ -6,7 +6,7 @@ export const communityImages = [
 ];
 
 export const stats = [
-  { number: "280+", label: "Members" },
+  { number: "130+", label: "Members" },
   { number: "50+", label: "Contests" },
   { number: "5", label: "ECPC Finals" },
   { number: "4", label: "Divisions" },

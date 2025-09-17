@@ -120,7 +120,7 @@ const MobileMenu = ({
                     darkMode ? "text-blue-400" : "text-blue-600"
                   }`}
                 >
-                  280+
+                  130+
                 </div>
                 <div
                   className={`text-xs ${

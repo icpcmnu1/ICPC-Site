@@ -89,7 +89,7 @@ const HomePage = ({ darkMode, setCurrentPage }) => {
               problem solving.
             </p>
             <p>
-              🚀 Join 280+ members on an incredible journey from beginner to
+              🚀 Join 130+ trainees on an incredible journey from beginner to
               ICPC finalist. Together, we code, compete, and conquer!
             </p>
           </div>
@@ -125,10 +125,10 @@ const HomePage = ({ darkMode, setCurrentPage }) => {
             data-animate
           >
             {[
-              { number: "280+", label: "Members" },
-              { number: "50+", label: "Contests" },
+              { number: "130+", label: "trainees" },
+              { number: "0", label: "Contests" },
               { number: "1", label: "ECPC Finals" },
-              { number: "4", label: "Divisions" }, // mentors , problem setters , admins , media team , paricipants
+              { number: "6", label: "Divisions" }, // Techical , admins , media team , HR , OT
             ].map((stat, index) => (
               <div
                 key={index}

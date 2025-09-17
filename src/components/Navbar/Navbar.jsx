@@ -8,7 +8,7 @@ import {
   Mail,
   Moon,
   Sun,
-  Menu, // أضف أيقونة القائمة
+  Menu,
 } from "lucide-react";
 
 const Navbar = ({
@@ -35,10 +35,10 @@ const Navbar = ({
             className="flex items-center gap-2 cursor-pointer"
             onClick={() => setCurrentPage("home")}
           >
-            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center overflow-hidden">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center overflow-hidden transition-transform duration-300 hover:scale-110">
               <img
                 src="https://github.com/Mazen-mo-10/imgs/blob/main/icon_Com.jpg?raw=true"
-                alt=" ICPC MNU Logo"
+                alt="ICPC MNU Logo"
                 className="w-full h-full object-cover"
               />
             </div>

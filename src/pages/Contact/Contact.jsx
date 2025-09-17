@@ -7,6 +7,8 @@ import {
   Facebook,
   Instagram,
   Linkedin,
+  //WhatsappIcon,
+  MessageCircle,
 } from "lucide-react";
 
 const Contact = ({ darkMode }) => {
@@ -133,6 +135,11 @@ const Contact = ({ darkMode }) => {
                     href: "https://www.linkedin.com/company/icpc-mnu-community/posts/?feedView=all",
                     color: "blue",
                   },
+                  {
+                    icon: MessageCircle,
+                    href: "https://whatsapp.com/channel/0029Vb5vctoLo4hgPJnL743T",
+                    color: "green",
+                  },
                 ].map((social, index) => (
                   <a
                     key={index}
@@ -160,7 +167,11 @@ const Contact = ({ darkMode }) => {
               Send Us a Message
             </h2>
 
-            <form className="space-y-6">
+            <form
+              className="space-y-6"
+              action="https://formspree.io/f/xandgjzp"
+              method="POST"
+            >
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label
@@ -172,12 +183,13 @@ const Contact = ({ darkMode }) => {
                   </label>
                   <input
                     type="text"
+                    name="name"
+                    placeholder="Your name"
                     className={`w-full px-4 py-3 rounded-lg border ${
                       darkMode
                         ? "bg-gray-800 border-gray-700 text-white focus:border-blue-500"
                         : "bg-white border-gray-300 text-gray-900 focus:border-blue-500"
                     } focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-colors`}
-                    placeholder="Your name"
                   />
                 </div>
                 <div>
@@ -190,6 +202,7 @@ const Contact = ({ darkMode }) => {
                   </label>
                   <input
                     type="email"
+                    name="email"
                     className={`w-full px-4 py-3 rounded-lg border ${
                       darkMode
                         ? "bg-gray-800 border-gray-700 text-white focus:border-blue-500"
@@ -210,6 +223,7 @@ const Contact = ({ darkMode }) => {
                 </label>
                 <input
                   type="text"
+                  name="subject"
                   className={`w-full px-4 py-3 rounded-lg border ${
                     darkMode
                       ? "bg-gray-800 border-gray-700 text-white focus:border-blue-500"
@@ -228,13 +242,14 @@ const Contact = ({ darkMode }) => {
                   Message
                 </label>
                 <textarea
+                  name="message"
                   rows="5"
                   className={`w-full px-4 py-3 rounded-lg border ${
                     darkMode
                       ? "bg-gray-800 border-gray-700 text-white focus:border-blue-500"
                       : "bg-white border-gray-300 text-gray-900 focus:border-blue-500"
                   } focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-colors`}
-                  placeholder="Your message here..."
+                  placeholder="Your message"
                 ></textarea>
               </div>
 
