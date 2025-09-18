@@ -270,10 +270,10 @@ const Dashboard = ({ darkMode }) => {
                 <div className="text-4xl font-extrabold">{trainee.solved}</div>
                 <span className="text-sm opacity-90">solved</span>
               </div>
-              <div className="flex items-center justify-center text-sm mt-2 opacity-90">
+              {/* <div className="flex items-center justify-center text-sm mt-2 opacity-90">
                 <ClockIcon className="w-4 h-4 mr-1" />
-                <span>{trainee.time}</span>
-              </div>
+                { <span>{trainee.time}</span> }
+              </div> */}
             </div>
 
             <div className="absolute bottom-0 left-0 right-0 h-2 bg-black bg-opacity-20"></div>
@@ -315,7 +315,7 @@ const Dashboard = ({ darkMode }) => {
         </div>
       </td>
       <td className="px-6 py-4 font-semibold text-lg">{trainee.solved}</td>
-      <td className="px-6 py-4">{trainee.time}</td>
+      {/* <td className="px-6 py-4">{trainee.time}</td> */}
       <td className="px-6 py-4">
         {trainee.trend === "up" ? (
           <div className="text-green-500 flex items-center animate-pulse">
@@ -581,7 +581,7 @@ const Dashboard = ({ darkMode }) => {
                           )}
                         </div>
                       </th>
-                      <th className="px-6 py-4">Time</th>
+                      {/* <th className="px-6 py-4">Time</th> */}
                       <th className="px-6 py-4">Trend</th>
                     </tr>
                   </thead>
@@ -826,7 +826,7 @@ const Dashboard = ({ darkMode }) => {
                             : "bg-gray-200 text-gray-700"
                         }`}
                       >
-                        {initiative.timeline}
+                        {/* {initiative.timeline} */}
                       </span>
                     </div>
                     <div className="flex items-center gap-3">
