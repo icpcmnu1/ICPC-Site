@@ -89,7 +89,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Ahmed Safaa",
       role: "Vice president",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/1dece2c8357bdd7cee3b15036344faf5%20-%20Hajar%20Alaa.jpg?raw=true",
       about:
         "Results-driven vice president with exceptional analytical skills and talent for optimizing organizational performance",
       rating: 4.8,
@@ -105,7 +106,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Pola Amir",
       role: "Vice president",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/b285e1aa-ff45-4767-b2de-5ca0d69c149f%20-%20Akpm%20Amir.jpeg?raw=true",
       about:
         "Innovative leader with expertise in developing growth strategies and fostering collaborative environments for success",
       rating: 4.7,
@@ -140,7 +142,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Habiba Mahmoud",
       role: "Media Head",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/1dece2c8357bdd7cee3b15036344faf5%20-%20Hajar%20Alaa.jpg?raw=true",
       about:
         "Creative media strategist with expertise in brand storytelling and digital content development across multiple platforms",
       rating: 4.7,
@@ -213,7 +216,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Enas Ibrahim",
       role: "Mentor",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/Enas%20Ibrahim%20Ali%20-%20Enas%20Ebrahim%20Elnsag.jpg?raw=true",
       about:
         "Empathetic mentor with talent for creating supportive learning environments and building student confidence",
       rating: 4.7,
@@ -229,7 +233,8 @@ const Community = ({ darkMode }) => {
     {
       name: "A'laa Khaled",
       role: "Mentor",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/1dece2c8357bdd7cee3b15036344faf5%20-%20Hajar%20Alaa.jpg?raw=true",
       about:
         "Structured mentor with methodical approach to teaching programming concepts and problem-solving techniques",
       rating: 4.5,
@@ -245,7 +250,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Fadwa Mahmoud",
       role: "Mentor",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/IMG-20250825-WA0042%20-%20Fadwa%20Mahmoud.jpg?raw=true",
       about:
         "Adaptive mentor skilled at tailoring explanations to different learning styles and knowledge levels",
       rating: 4.6,
@@ -261,7 +267,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Malak Tamer",
       role: "Mentor",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/IMG-20250825-WA0141%20-%20malk%20tamer.jpg?raw=true",
       about:
         "Encouraging mentor with talent for fostering growth mindset and resilience in programming students",
       rating: 4.7,
@@ -275,9 +282,10 @@ const Community = ({ darkMode }) => {
       links: {},
     },
     {
-      name: "Muhamed Mustafa",
+      name: "Mahamed Mustafa",
       role: "Mentor",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/IMG_20250619_143401%20-%20Mohamed%20Mostafa%20Saadawy.jpg?raw=true",
       about:
         "Patient and structured mentor with exceptional talent for breaking down complex programming concepts into manageable learning steps",
       rating: 4.5,
@@ -293,7 +301,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Hager Alaa",
       role: "Mentor",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/1dece2c8357bdd7cee3b15036344faf5%20-%20Hajar%20Alaa.jpg?raw=true",
       about:
         "Detail-oriented Java specialist with methodical teaching approach that builds strong foundational programming skills",
       rating: 4.6,
@@ -309,7 +318,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Abdelhalim Mohamed",
       role: "Mentor",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/IMG_20240830_030605_220%20-%20Abdo%20Mohammed.jpg?raw=true",
       about:
         "Experienced Java mentor with systematic problem-solving methodology that empowers students to tackle complex challenges",
       rating: 4.7,
@@ -343,7 +353,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Mai Alaa",
       role: "Problem setter",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/WhatsApp%20Image%202025-08-27%20at%2021.41.10_3f336a1c%20-%20kareem%20amer.jpg?raw=true",
       about:
         "Creative problem setter with exceptional ability to design balanced and intellectually stimulating programming challenges",
       rating: 4.5,
@@ -357,9 +368,10 @@ const Community = ({ darkMode }) => {
       links: {},
     },
     {
-      name: "Fadi Nabil",
+      name: "Fady Nabil",
       role: "Problem setter",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/IMG_1330%20-%20Fady%20Nabil.jpeg?raw=true",
       about:
         "Detail-oriented problem setter with talent for crafting precise and comprehensive programming problems",
       rating: 4.6,
@@ -399,7 +411,8 @@ const Community = ({ darkMode }) => {
     {
       name: "George Ayman",
       role: "Mentor and problem setter",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/Picsart_25-04-21_13-14-17-715%20-%20%D8%AC%D9%88%D8%B1%D8%AC%20%D8%A7%D9%8A%D9%85%D9%86.jpg?raw=true",
       about:
         "Dual-role expert who excels at both creating challenging problems and mentoring students through solution approaches",
       rating: 4.7,
@@ -415,7 +428,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Rimas Serage",
       role: "HR",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/1dece2c8357bdd7cee3b15036344faf5%20-%20Hajar%20Alaa.jpg?raw=true",
       about:
         "Dedicated HR professional with strong interpersonal skills and talent for fostering positive organizational culture",
       rating: 4.4,
@@ -431,7 +445,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Jena Ayman",
       role: "HR",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/1dece2c8357bdd7cee3b15036344faf5%20-%20Hajar%20Alaa.jpg?raw=true",
       about:
         "Organized HR specialist with excellent administrative skills and attention to detail in personnel management",
       rating: 4.5,
@@ -447,7 +462,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Basmala Mohie",
       role: "HR",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/retouch_%D9%A2%D9%A0%D9%A2%D9%A4%D9%A1%D9%A2%D9%A2%D9%A9%D9%A0%D9%A8%D9%A2%D9%A1%D9%A3%D9%A4%D9%A8%D9%A9%20-%20BASMALA%20MOHIE%20MOHAMMAD.jpg?raw=true",
       about:
         "People-focused HR professional with exceptional empathy and conflict resolution abilities",
       rating: 4.6,
@@ -463,7 +479,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Basmala Rady",
       role: "HR",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/IMG_6522%20-%20Basmala%20Rady.jpeg?raw=true",
       about:
         "Proactive HR coordinator with talent for identifying organizational needs and implementing effective solutions",
       rating: 4.5,
@@ -479,7 +496,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Ziad Muhammad",
       role: "HR",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/1dece2c8357bdd7cee3b15036344faf5%20-%20Hajar%20Alaa.jpg?raw=true",
       about:
         "Analytical HR professional with strong problem-solving skills and systematic approach to personnel management",
       rating: 4.4,
@@ -495,7 +513,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Tasneem Amer",
       role: "HR",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/1dece2c8357bdd7cee3b15036344faf5%20-%20Hajar%20Alaa.jpg?raw=true",
       about:
         "Energetic HR specialist with excellent communication skills and talent for employee engagement initiatives",
       rating: 4.6,
@@ -511,7 +530,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Salma Amer",
       role: "HR",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/1dece2c8357bdd7cee3b15036344faf5%20-%20Hajar%20Alaa.jpg?raw=true",
       about:
         "Diligent HR coordinator with strong organizational skills and commitment to maintaining harmonious workplace environment",
       rating: 4.5,
@@ -525,9 +545,10 @@ const Community = ({ darkMode }) => {
       links: {},
     },
     {
-      name: "Hader Gamal",
+      name: "Hadeer Gamal",
       role: "HR",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/IMG-20250825-WA0131%20-%20Hadeer%20Gamal.jpg?raw=true",
       about:
         "Committed HR professional with focus on developmental support and continuous improvement of team capabilities",
       rating: 4.4,
@@ -543,7 +564,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Waseem Ashraf",
       role: "Vice head media",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/1dece2c8357bdd7cee3b15036344faf5%20-%20Hajar%20Alaa.jpg?raw=true",
       about:
         "Strategic media deputy with strong visual storytelling skills and expertise in multi-platform content distribution",
       rating: 4.6,
@@ -559,7 +581,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Lama Waleed",
       role: "Content writer",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/1dece2c8357bdd7cee3b15036344faf5%20-%20Hajar%20Alaa.jpg?raw=true",
       about:
         "Creative content writer with engaging narrative style and talent for crafting compelling organizational stories",
       rating: 4.7,
@@ -575,7 +598,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Omnia Shady",
       role: "Content writer",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/1dece2c8357bdd7cee3b15036344faf5%20-%20Hajar%20Alaa.jpg?raw=true",
       about:
         "Versatile content creator with adaptability across different media formats and audience targeting",
       rating: 4.5,
@@ -591,7 +615,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Shahd Ali",
       role: "Content writer",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/1dece2c8357bdd7cee3b15036344faf5%20-%20Hajar%20Alaa.jpg?raw=true",
       about:
         "Precise content developer with excellent research skills and attention to factual accuracy in communications",
       rating: 4.6,
@@ -607,7 +632,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Marina Amir",
       role: "Video Editor",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/1dece2c8357bdd7cee3b15036344faf5%20-%20Hajar%20Alaa.jpg?raw=true",
       about:
         "Creative storyteller with exceptional ability to transform technical concepts into engaging and accessible content",
       rating: 4.7,
@@ -623,7 +649,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Ahmed Gamal",
       role: "Vice head organiser",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/IMG_6287%20-%20Ahmed%20Gamal%20salem.JPG?raw=true",
       about:
         "Efficient organizational deputy with strong logistical planning skills and attention to operational details",
       rating: 4.7,
@@ -639,7 +666,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Hajar Ahmed",
       role: "Organizers Head",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/IMG_20250810_211759%20-%20Hajer%20Ahmmed.jpg?raw=true",
       about:
         "Exceptional event coordinator with meticulous planning skills and talent for executing flawless organizational operations",
       rating: 4.7,
@@ -655,7 +683,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Aya Mahmoud",
       role: "Organizer",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/img-aya-mahmoud.jpg?raw=true",
       about:
         "Meticulous event organizer with exceptional planning capabilities and talent for anticipating logistical needs",
       rating: 4.6,
@@ -671,7 +700,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Menna Maher",
       role: "Organizer",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/FB_IMG_1756132615242%20-%20Menna%20Maher.jpg?raw=true",
       about:
         "Dynamic organizer with strong execution skills and ability to manage multiple tasks simultaneously under pressure",
       rating: 4.5,
@@ -687,7 +717,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Jomana",
       role: "Organizer",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/1dece2c8357bdd7cee3b15036344faf5%20-%20Hajar%20Alaa.jpg?raw=true",
       about:
         "Resourceful organizing professional with creative problem-solving skills for unexpected challenges",
       rating: 4.6,
@@ -703,7 +734,8 @@ const Community = ({ darkMode }) => {
     {
       name: "Roaa Muhammed",
       role: "Organizer",
-      image: "",
+      image:
+        "https://github.com/Mazen-mo-10/imgs/blob/main/IMG_20250609_201333_054%20-%20Roka%20Youssef.jpg?raw=true",
       about:
         "Proactive organizer with exceptional adaptability and talent for developing innovative solutions to logistical challenges",
       rating: 4.6,

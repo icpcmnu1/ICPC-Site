@@ -885,9 +885,9 @@ const Dashboard = ({ darkMode }) => {
                   {[
                     {
                       icon: <Users className="text-blue-500" />,
-                      title: "1000+ Members",
+                      title: "1000+ trainees",
                       description:
-                        "Grow our community to over 1000 active members",
+                        "Grow our community to over 1000 active trainees ",
                     },
                     {
                       icon: <TrendingUp className="text-green-500" />,
