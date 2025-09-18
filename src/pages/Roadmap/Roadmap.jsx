@@ -19,7 +19,12 @@ import {
   Code,
   Database,
   Brain,
+  X,
+  PartyPopper,
+  AlertCircle,
+  Lightbulb,
 } from "lucide-react";
+import { weeklyChallenges } from "./weeklyChallenge";
 
 const Roadmap = ({ darkMode }) => {
   const [expandedLevel, setExpandedLevel] = useState(null);
@@ -28,6 +33,12 @@ const Roadmap = ({ darkMode }) => {
   const [progress, setProgress] = useState({});
   const [isPlaying, setIsPlaying] = useState(true);
   const [bookmarkedResources, setBookmarkedResources] = useState([]);
+
+  const [currentChallenge, setCurrentChallenge] = useState(null);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [showResult, setShowResult] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [celebrating, setCelebrating] = useState(false);
 
   // Sample roadmap data
   const roadmapData = [
@@ -97,6 +108,20 @@ const Roadmap = ({ darkMode }) => {
     setProgress(userProgress);
   }, []);
 
+  useEffect(() => {
+    const currentChallengeId = localStorage.getItem("currentChallengeId") || 1;
+    const challenge = weeklyChallenges.find((c) => c.id == currentChallengeId);
+    setCurrentChallenge(challenge);
+
+    const completedChallenges = JSON.parse(
+      localStorage.getItem("completedChallenges") || "{}"
+    );
+    if (completedChallenges[challenge.id]) {
+      setShowResult(true);
+      setIsCorrect(completedChallenges[challenge.id].isCorrect);
+    }
+  }, []);
+
   // Simulate success stories data
   useEffect(() => {
     const stories = [
@@ -159,12 +184,68 @@ const Roadmap = ({ darkMode }) => {
     );
   };
 
+  const handleAnswerSelect = (index) => {
+    if (showResult) return;
+    setSelectedAnswer(index);
+  };
+
+  const submitAnswer = () => {
+    if (selectedAnswer === null) return;
+
+    const correct = selectedAnswer === currentChallenge.correctAnswer;
+    setIsCorrect(correct);
+    setShowResult(true);
+
+    const completedChallenges = JSON.parse(
+      localStorage.getItem("completedChallenges") || "{}"
+    );
+    completedChallenges[currentChallenge.id] = {
+      isCorrect: correct,
+      selectedAnswer: selectedAnswer,
+    };
+    localStorage.setItem(
+      "completedChallenges",
+      JSON.stringify(completedChallenges)
+    );
+
+    if (correct) {
+      setCelebrating(true);
+      setTimeout(() => setCelebrating(false), 3000);
+    }
+  };
+
+  const ResetChallenge = () => {
+    const completedChallenges = JSON.parse(
+      localStorage.getItem("completedChallenges") || "{}"
+    );
+    delete completedChallenges[currentChallenge.id];
+    localStorage.setItem(
+      "completedChallenges",
+      JSON.stringify(completedChallenges)
+    );
+
+    setShowResult(false);
+    setSelectedAnswer(null);
+    setIsCorrect(false);
+  };
+
   return (
     <div
       className={`min-h-screen py-20 px-6 pt-24 ${
         darkMode ? "bg-gray-900" : "bg-gray-50"
       }`}
     >
+      {/* Celebration effect */}
+      {celebrating && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-70">
+          <div className="text-center p-8 rounded-2xl bg-gradient-to-r from-green-400 to-blue-500 text-white">
+            <PartyPopper size={64} className="mx-auto mb-4 animate-bounce" />
+            <h2 className="text-3xl font-bold mb-2">Congrats!</h2>
+            <p className="text-xl">Your answer is correct! Keep going.</p>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h1
@@ -446,7 +527,7 @@ const Roadmap = ({ darkMode }) => {
             ))}
           </div>
 
-          {/* Sidebar with Additional Features */}
+          {/* Sidebar */}
           <div className="lg:w-1/3 space-y-6">
             {/* Success Stories Carousel */}
             <div
@@ -561,53 +642,148 @@ const Roadmap = ({ darkMode }) => {
               }`}
             >
               <h2
-                className={`text-xl font-bold mb-4 ${
+                className={`text-xl font-bold mb-4 flex items-center ${
                   darkMode ? "text-white" : "text-gray-900"
                 }`}
               >
-                <Target className="inline mr-2 text-red-500" />
-                Weekly Challenge
+                <Target className="mr-2 text-red-500" />
+                Challenge of the week{" "}
+                {showResult && isCorrect && (
+                  <span className="ml-2 text-green-500">✓</span>
+                )}
               </h2>
 
-              <div
-                className={`p-4 rounded-lg ${
-                  darkMode ? "bg-gray-700" : "bg-gray-100"
-                }`}
-              >
-                <h3
-                  className={`font-semibold mb-2 ${
-                    darkMode ? "text-white" : "text-gray-900"
-                  }`}
-                >
-                  Graph Traversal Problems
-                </h3>
-                <p
-                  className={`text-sm mb-3 ${
-                    darkMode ? "text-gray-400" : "text-gray-600"
-                  }`}
-                >
-                  Solve 5 problems related to BFS/DFS algorithms
-                </p>
-
-                <div className="flex items-center justify-between">
-                  <span
-                    className={`text-xs ${
-                      darkMode ? "text-gray-500" : "text-gray-400"
+              {currentChallenge && (
+                <div>
+                  <div
+                    className={`p-4 rounded-lg mb-4 ${
+                      darkMode ? "bg-gray-700" : "bg-gray-100"
                     }`}
                   >
-                    Ends in 3 days
-                  </span>
-                  <button
-                    className={`text-xs px-3 py-1 rounded-full ${
-                      darkMode
-                        ? "bg-blue-600 hover:bg-blue-700"
-                        : "bg-blue-500 hover:bg-blue-600"
-                    } text-white`}
-                  >
-                    Participate
-                  </button>
+                    <h3
+                      className={`font-semibold mb-2 ${
+                        darkMode ? "text-white" : "text-gray-900"
+                      }`}
+                    >
+                      {currentChallenge.question}
+                    </h3>
+
+                    <div className="space-y-2 mt-4">
+                      {currentChallenge.options.map((option, index) => (
+                        <div
+                          key={index}
+                          onClick={() => handleAnswerSelect(index)}
+                          className={`p-3 rounded-lg cursor-pointer transition-all ${
+                            darkMode
+                              ? "bg-gray-600 hover:bg-gray-500"
+                              : "bg-gray-200 hover:bg-gray-300"
+                          } ${
+                            selectedAnswer === index
+                              ? "ring-2 ring-blue-500"
+                              : ""
+                          } ${
+                            showResult &&
+                            index === currentChallenge.correctAnswer
+                              ? "bg-green-100 text-green-800 border border-green-300"
+                              : ""
+                          } ${
+                            showResult &&
+                            selectedAnswer === index &&
+                            selectedAnswer !== currentChallenge.correctAnswer
+                              ? "bg-red-100 text-red-800 border border-red-300"
+                              : ""
+                          }`}
+                        >
+                          <div className="flex items-center">
+                            <div
+                              className={`w-6 h-6 rounded-full flex items-center justify-center mr-3 ${
+                                darkMode ? "bg-gray-500" : "bg-white"
+                              } ${
+                                showResult &&
+                                index === currentChallenge.correctAnswer
+                                  ? "bg-green-300 text-green-800"
+                                  : ""
+                              }`}
+                            >
+                              {String.fromCharCode(65 + index)}
+                            </div>
+                            {option}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {showResult && (
+                      <div
+                        className={`mt-4 p-3 rounded-lg ${
+                          isCorrect
+                            ? "bg-green-100 text-green-800"
+                            : "bg-red-100 text-red-800"
+                        }`}
+                      >
+                        <div className="flex items-start">
+                          {isCorrect ? (
+                            <CheckCircle className="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" />
+                          ) : (
+                            <AlertCircle className="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" />
+                          )}
+                          <div>
+                            <p className="font-semibold">
+                              {isCorrect
+                                ? "Correct answer! Congratulations!"
+                                : `Wrong answer. The correct answer is: ${
+                                    currentChallenge.options[
+                                      currentChallenge.correctAnswer
+                                    ]
+                                  }`}
+                            </p>
+                            <div className="mt-2 flex">
+                              <Lightbulb className="w-4 h-4 mr-1 mt-0.5 flex-shrink-0" />
+                              <p className="text-sm">
+                                {currentChallenge.explanation}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex justify-between items-center">
+                    {!showResult ? (
+                      <button
+                        onClick={submitAnswer}
+                        disabled={selectedAnswer === null}
+                        className={`px-4 py-2 rounded-full ${
+                          selectedAnswer === null
+                            ? "bg-gray-400 cursor-not-allowed"
+                            : darkMode
+                            ? "bg-blue-600 hover:bg-blue-700"
+                            : "bg-blue-500 hover:bg-blue-600"
+                        } text-white`}
+                      >
+                        Confirm the answer{" "}
+                      </button>
+                    ) : // ) : (
+                    //   <div className="text-sm">
+                    //     {isCorrect
+                    //       ? "You have successfully completed this challenge!"
+                    //       : "Try again next week!"}
+                    //   </div>
+                    // )
+                    null}
+                    {/* Reset Button */}
+                    {/* {import.meta.env.MODE === "development" && (
+                      <button
+                        onClick={ResetChallenge}
+                        className="text-xs text-gray-500 hover:text-gray-700"
+                      >
+                        Reset
+                      </button>
+                    )} */}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
 
             {/* Recommended Resources */}

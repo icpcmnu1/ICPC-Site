@@ -121,7 +121,7 @@ const Dashboard = ({ darkMode }) => {
   }, []);
 
   // Handle sorting
-  const handleSort = useCallback(
+  const HandleSort = useCallback(
     (field) => {
       if (sortBy === field) {
         setLeaderboard((prev) => [...prev].reverse());
@@ -570,15 +570,9 @@ const Dashboard = ({ darkMode }) => {
                     >
                       <th className="px-6 py-4">Rank</th>
                       <th className="px-6 py-4">Participant</th>
-                      <th
-                        className="px-6 py-4 cursor-pointer"
-                        onClick={() => handleSort("solved")}
-                      >
+                      <th className="px-6 py-4">
                         <div className="flex items-center">
                           <span>Solved</span>
-                          {sortBy === "solved" && (
-                            <ChevronDown className="w-4 h-4 ml-1" />
-                          )}
                         </div>
                       </th>
                       {/* <th className="px-6 py-4">Time</th> */}
