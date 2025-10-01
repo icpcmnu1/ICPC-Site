@@ -169,7 +169,7 @@ const Contact = ({ darkMode }) => {
 
             <form
               className="space-y-6"
-              action="https://formspree.io/f/xandgjzp"
+              action="https://formspree.io/f/mdkwgvow"
               method="POST"
             >
               <div className="grid md:grid-cols-2 gap-6">

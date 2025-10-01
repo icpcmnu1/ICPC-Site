@@ -54,7 +54,6 @@ const MiniaICPCCommunity = () => {
           setCurrentPage={setCurrentPage}
           setMobileMenuOpen={setMobileMenuOpen}
         />
-
         <MobileMenu
           darkMode={darkMode}
           currentPage={currentPage}
@@ -62,15 +61,12 @@ const MiniaICPCCommunity = () => {
           isOpen={mobileMenuOpen}
           onClose={() => setMobileMenuOpen(false)}
         />
-
         <main ref={scrollRef}>{renderPage()}</main>
-
         <ScrollToTop
           darkMode={darkMode}
           showScrollTop={showScrollTop}
           scrollToTop={scrollToTop}
         />
-
         <Footer darkMode={darkMode} setCurrentPage={setCurrentPage} />
       </div>
     </div>

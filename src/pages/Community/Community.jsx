@@ -4,6 +4,7 @@ import {
   Facebook,
   Instagram,
   Linkedin,
+  Mail,
   Search,
   Filter,
   Trophy,
@@ -52,7 +53,8 @@ const Community = ({ darkMode }) => {
       links: {
         github: "https://github.com/Mazen-mo-10",
         linkedin: "https://www.linkedin.com/in/mazenmohamed2212/",
-        facebook: "https://www.facebook.com/share/19wwAcpoa2/",
+        facebook: "https://www.facebook.com/share/17P634Tzdc/",
+        Mail: "mailto:engmazenmohamed22@gmail.com",
       },
     },
     {
@@ -69,8 +71,9 @@ const Community = ({ darkMode }) => {
         "Team Management",
       ],
       links: {
-        facebook: "https://www.facebook.com/share/1ZXunReQZ3/",
-        linkedin: "https://www.linkedin.com/in/youssef%D9%80bahaa/",
+        facebook: "https://www.facebook.com/youssef.bahaa.862665",
+        linkedin: "https://www.linkedin.com/in/youssefـbahaa",
+        Mail: "mailto:youssefbahaa200018@gmail.com",
       },
     },
     {
@@ -118,7 +121,11 @@ const Community = ({ darkMode }) => {
         "Change Management",
         "Communication",
       ],
-      links: {},
+      links: {
+        facebook: "https://www.facebook.com/share/1ESWCyZWJx/",
+        linkedin: "https://www.linkedin.com/in/pola-amir-7b74b9326",
+        Mail: "mailto:akpm.amir@gmail.com",
+      },
     },
     {
       name: "Ali Adel",
@@ -154,7 +161,11 @@ const Community = ({ darkMode }) => {
         "Social Media",
         "Digital Marketing",
       ],
-      links: {},
+      links: {
+        facebook: "https://www.facebook.com/share/1CFshv6FZi/",
+        linkedin: "https://www.linkedin.com/in/habiba-mahmoud-a33b78281",
+        Mail: "mailto:habibamahamod961@gmail.com",
+      },
     },
 
     {
@@ -173,7 +184,8 @@ const Community = ({ darkMode }) => {
         "Java",
       ],
       links: {
-        linkedin: "https://www.linkedin.com/in/anas-desoky-762715242/",
+        linkedin: "https://www.linkedin.com/in/anasdesoky",
+        Mail: "mailto:monkaiengineer@gmail.com",
       },
     },
     {
@@ -210,7 +222,9 @@ const Community = ({ darkMode }) => {
         "Teaching",
       ],
       links: {
-        linkedin: "https://www.linkedin.com/in/abdullah-haitham/",
+        linkedin: "https://www.linkedin.com/in/abdullah-haitham",
+        Mail: "mailto:hawk230a@gmail.com",
+        github: "https://github.com/VRS0"
       },
     },
     {
@@ -228,7 +242,12 @@ const Community = ({ darkMode }) => {
         "Progress Monitoring",
         "Python",
       ],
-      links: {},
+      links: {
+        facebook: "https://www.facebook.com/share/19mcxZ13x7/",
+        linkedin: "https://www.linkedin.com/in/enas-elnsag",
+        Mail: "mailto:enaselnsag@gmail.com",
+        github: "https://github.com/EnasIbrahimAli2005"
+      },
     },
     {
       name: "A'laa Khaled",
@@ -245,7 +264,11 @@ const Community = ({ darkMode }) => {
         "Technical Explanation",
         "Java",
       ],
-      links: {},
+      links: {
+        facebook: "https://www.facebook.com/share/1BJ8w9Lqt7/",
+        linkedin: "https://www.linkedin.com/in/alaa-khaled-a234b3348",
+        Mail: "mailto:alaakhaledm54@gmail.com",
+      },
     },
     {
       name: "Fadwa Mahmoud",
@@ -262,7 +285,11 @@ const Community = ({ darkMode }) => {
         "Concept Visualization",
         "Python",
       ],
-      links: {},
+      links: {
+        facebook: "https://www.facebook.com/share/1Bu11wKaVe/",
+        linkedin: "https://www.linkedin.com/in/fadwaa-mahmouud/",
+        Mail: "mailto:fadwamahmoud.190@gmail.com",
+      },
     },
     {
       name: "Malak Tamer",
@@ -296,7 +323,12 @@ const Community = ({ darkMode }) => {
         "Debugging Techniques",
         "Code Optimization",
       ],
-      links: {},
+      links: {
+        facebook: "https://www.facebook.com/share/1AzgL8RNqu/",
+        linkedin: "https://www.linkedin.com/in/muhammad-saadawy-b52b01226",
+        Mail: "mailto:elsameenm@gmail.com",
+        github: "https://github.com/Saadawy-AI"
+      },
     },
     {
       name: "Hager Alaa",
@@ -313,7 +345,10 @@ const Community = ({ darkMode }) => {
         "Technical Explanation",
         "Project Guidance",
       ],
-      links: {},
+      links: {
+        linkedin: "https://www.linkedin.com/in/hajar-alaa-56049331a",
+        Mail: "mailto:hajar3laa102@gmail.com",
+      },
     },
     {
       name: "Abdelhalim Mohamed",
@@ -330,7 +365,12 @@ const Community = ({ darkMode }) => {
         "Technical Mentoring",
         "Algorithm Implementation",
       ],
-      links: {},
+      links: {
+        facebook: "https://www.facebook.com/share/1W1mPP62gr/",
+        linkedin: "https://www.linkedin.com/in/abdelhalim-mohamed-6794a5203",
+        Mail: "mailto:abdelhalim.m0hamed.ibrahim@gmail.com",
+        github: "https://github.com/halimmohamed"
+      },
     },
     {
       name: "Ziad Ayman",
@@ -347,7 +387,9 @@ const Community = ({ darkMode }) => {
       ],
       links: {
         github: "https://github.com/engzooz",
-        linkedin: "https://www.linkedin.com/in/ziad-ayman-8b3899364/",
+        linkedin: "https://www.linkedin.com/in/engzooz",
+        facebook: "https://www.facebook.com/share/1EQac2c6c1/",
+        Mail: "mailto:za0271497@gmail.com",
       },
     },
     {
@@ -365,7 +407,11 @@ const Community = ({ darkMode }) => {
         "Logical Thinking",
         "Java",
       ],
-      links: {},
+      links: {
+        facebook: "https://www.facebook.com/mai.alaa66",
+        linkedin: "https://www.linkedin.com/in/mai-elsaid-ahmed-540367371",
+        Mail: "mailto:omarmayalaa@gmail.com",
+      },
     },
     {
       name: "Fady Nabil",
@@ -382,7 +428,11 @@ const Community = ({ darkMode }) => {
         "Debugging",
         "C++",
       ],
-      links: {},
+      links: {
+        facebook: "https://www.facebook.com/share/1CuMVKNCGq/",
+        linkedin: "https://www.linkedin.com/in/fady-nabil-729215326",
+        Mail: "mailto:fadyn1900@gmail.com",
+      },
     },
     {
       name: "Shady Ibrahim",
@@ -390,7 +440,7 @@ const Community = ({ darkMode }) => {
       image:
         "https://github.com/Mazen-mo-10/imgs/blob/main/shady_Img.jpeg?raw=true",
       about:
-        "Problem setter for the university ICPC team, creating well-structured and challenging problems to enhance students’ problem-solving skills.",
+        "Problem setter for the university ICPC team, creating well-structured and challenging problems to enhance students' problem-solving skills.",
       rating: 4.7,
       skills: [
         "Algorithms",
@@ -423,7 +473,11 @@ const Community = ({ darkMode }) => {
         "Student Assessment",
         "Python",
       ],
-      links: {},
+      links: {
+        facebook: "https://www.facebook.com/gogo.aymin.5",
+        linkedin: "https://www.linkedin.com/in/george-aymin-a25379376/",
+        Mail: "mailto:gogoaymin05@gmail.com",
+      },
     },
     {
       name: "Rimas Serage",
@@ -440,7 +494,11 @@ const Community = ({ darkMode }) => {
         "Interpersonal Communication",
         "Team Support",
       ],
-      links: {},
+      links: {
+        facebook: "https://www.facebook.com/share/1CagJkpbS7/",
+        linkedin: "https://www.linkedin.com/in/rimas-sirag-eldin-722832384",
+        Mail: "mailto:remasserag260@gmail.com",
+      },
     },
     {
       name: "Jena Ayman",
@@ -457,7 +515,11 @@ const Community = ({ darkMode }) => {
         "Policy Implementation",
         "Coordination",
       ],
-      links: {},
+      links: {
+        facebook: "https://www.facebook.com/share/17Ty5qCCU6/",
+        linkedin: "https://www.linkedin.com/in/jena-ayman-b973a1318",
+        Mail: "mailto:jenaayman2004@gmail.com",
+      },
     },
     {
       name: "Basmala Mohie",
@@ -469,7 +531,7 @@ const Community = ({ darkMode }) => {
       rating: 4.6,
       skills: [
         "Conflict Resolution",
-        "Empathetic Communication",
+        "Emphatic Communication",
         "Team Integration",
         "Moral Support",
         "Mediation",
@@ -525,7 +587,11 @@ const Community = ({ darkMode }) => {
         "Team Motivation",
         "Activity Coordination",
       ],
-      links: {},
+      links: {
+        facebook: "https://www.facebook.com/share/15DBaEjKMTT/",
+        linkedin: "https://www.linkedin.com/in/tasneem-amer-776631305",
+        Mail: "mailto:ttttttt9094@gmail.com",
+      },
     },
     {
       name: "Salma Amer",
@@ -542,7 +608,11 @@ const Community = ({ darkMode }) => {
         "Environment Maintenance",
         "Support Services",
       ],
-      links: {},
+      links: {
+        facebook: "https://www.facebook.com/share/17Rqph6pAZ/",
+        linkedin: "https://www.linkedin.com/in/salma3amer",
+        Mail: "mailto:salma3amerr@gmail.com",
+      },
     },
     {
       name: "Hadeer Gamal",
@@ -559,7 +629,11 @@ const Community = ({ darkMode }) => {
         "Skill Assessment",
         "Training Assistance",
       ],
-      links: {},
+      links: {
+        facebook: "https://www.facebook.com/share/1B7nZykekq/",
+        linkedin: "https://www.linkedin.com/in/hadeer-gamal-5bb1a633b",
+        Mail: "mailto:hadeergamal928@gmail.com",
+      },
     },
     {
       name: "Waseem Ashraf",
@@ -576,7 +650,10 @@ const Community = ({ darkMode }) => {
         "Brand Consistency",
         "Campaign Execution",
       ],
-      links: {},
+      links: {
+        facebook: "https://www.facebook.com/share/18mYCHuSKi/",
+        Mail: "mailto:waseemashrafdoktor@gmail.com",
+      },
     },
     {
       name: "Lama Waleed",
@@ -627,7 +704,10 @@ const Community = ({ darkMode }) => {
         "Information Verification",
         "Clear Communication",
       ],
-      links: {},
+      links: {
+        linkedin: "https://www.linkedin.com/in/shahd-ali-b54522381",
+        Mail: "mailto:shahdhassanalnashar@gmail.com",
+      },
     },
     {
       name: "Marina Amir",
@@ -661,24 +741,31 @@ const Community = ({ darkMode }) => {
         "Coordination",
         "Resource Allocation",
       ],
-      links: {},
+      links: {
+        facebook: "https://www.facebook.com/ahmed.gamal.salem.700506",
+        linkedin: "https://www.linkedin.com/in/ahmed-gamal-0b1237313",
+        Mail: "mailto:agamalsalem513@gmail.com",
+      },
     },
     {
       name: "Hajar Ahmed",
       role: "Organizers Head",
       image:
-        "https://github.com/Mazen-mo-10/imgs/blob/main/IMG_20250810_211759%20-%20Hajer%20Ahmmed.jpg?raw=true",
+        "https://github.com/Mazen-mo-10/imgs/blob/main/1dece2c8357bdd7cee3b15036344faf5%20-%20Hajar%20Alaa.jpg?raw=true",
       about:
         "Exceptional event coordinator with meticulous planning skills and talent for executing flawless organizational operations",
-      rating: 4.7,
+      rating: 4.1,
       skills: [
         "Event Planning",
         "Logistics Management",
         "Team Coordination",
-        "Budget Management",
         "Timeline Execution",
       ],
-      links: {},
+      links: {
+        facebook: "https://www.facebook.com/share/17G2HGrA2P/",
+        linkedin: "https://www.linkedin.com/in/hajer-ahmmed-697416383",
+        Mail: "mailto:hajerahmmed525@gmail.com",
+      },
     },
     {
       name: "Aya Mahmoud",
@@ -695,7 +782,11 @@ const Community = ({ darkMode }) => {
         "Schedule Coordination",
         "Preparation",
       ],
-      links: {},
+      links: {
+        facebook: "https://www.facebook.com/share/1BKZ6Y17mW/",
+        linkedin: "https://www.linkedin.com/in/aya-mahmoud-b847562a4",
+        Mail: "mailto:ayamahmoudsaad317@gmail.com",
+      },
     },
     {
       name: "Menna Maher",
@@ -712,7 +803,11 @@ const Community = ({ darkMode }) => {
         "Task Coordination",
         "Adaptive Planning",
       ],
-      links: {},
+      links: {
+        facebook: "Menna El beblawy",
+        linkedin: "Menna El_beblawy",
+        Mail: "mailto:mennafathi679@gmail.com",
+      },
     },
     {
       name: "Jomana",
@@ -729,7 +824,11 @@ const Community = ({ darkMode }) => {
         "Improvisation",
         "Situation Management",
       ],
-      links: {},
+      links: {
+        facebook: "https://www.facebook.com/share/1XwYhwpooB/",
+        linkedin: "https://www.linkedin.com/in/jomana-sobhy-891658352",
+        Mail: "mailto:sobhyjomana2@gmail.com",
+      },
     },
     {
       name: "Roaa Muhammed",
@@ -746,7 +845,11 @@ const Community = ({ darkMode }) => {
         "Crisis Management",
         "Multi-Tasking",
       ],
-      links: {},
+      links: {
+        facebook: "Roaa Youssef",
+        linkedin: "Roaa mohamed",
+        Mail: "mailto:bodyroka830@gmail.com",
+      },
     },
   ];
 
@@ -1022,7 +1125,9 @@ const Community = ({ darkMode }) => {
                             ? Linkedin
                             : platform === "instagram"
                             ? Instagram
-                            : Facebook;
+                            : platform === "facebook"
+                            ? Facebook
+                            : Mail;
                         return (
                           <a
                             key={idx}
