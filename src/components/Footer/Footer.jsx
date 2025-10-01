@@ -110,6 +110,11 @@ const Footer = ({ darkMode, setCurrentPage }) => {
                   href: "https://whatsapp.com/channel/0029Vb5vctoLo4hgPJnL743T",
                   color: "green",
                 },
+                {
+                  icon: Github,
+                  href: "https://github.com/icpcmnu1",
+                  color: "gray",
+                },
               ].map((social, index) => (
                 <a
                   key={index}
