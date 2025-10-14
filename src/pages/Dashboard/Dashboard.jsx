@@ -23,7 +23,7 @@ import { communityGoals, communityProgress } from "../../data/communityData";
 import { roadmapData } from "../../data/roadmapData";
 
 const Dashboard = ({ darkMode }) => {
-  const [activeTab, setActiveTab] = useState("leaderboard");
+  const [activeTab, setActiveTab] = useState("progress");
   const [leaderboard, setLeaderboard] = useState([]);
   const [searchTerm, SetSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("solved");
@@ -138,54 +138,6 @@ const Dashboard = ({ darkMode }) => {
   const filteredLeaderboard = leaderboard.filter((trainee) =>
     trainee.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  // Function to update solved problems randomly (for simulation)
-  // const updateRandomTrainee = useCallback(() => {
-  //   setIsUpdating(true);
-
-  //   setLeaderboard((prev) => {
-  //     const updated = [...prev];
-
-  //     // Select 2-3 random trainees to update
-  //     const numUpdates = Math.floor(Math.random() * 2) + 2;
-  //     const updatedIndices = new Set();
-
-  //     while (updatedIndices.size < numUpdates) {
-  //       updatedIndices.add(Math.floor(Math.random() * updated.length));
-  //     }
-
-  //     updatedIndices.forEach((index) => {
-  //       const randomIncrement = Math.floor(Math.random() * 5) + 1;
-  //       updated[index] = {
-  //         ...updated[index],
-  //         solved: updated[index].solved + randomIncrement,
-  //       };
-  //     });
-
-  //     // Re-sort after update and update trends
-  //     const sorted = updated.sort((a, b) => b.solved - a.solved);
-
-  //     // Update trends based on rank changes
-  //     return sorted.map((trainee, newIndex) => {
-  //       const oldIndex = prev.findIndex((t) => t.id === trainee.id);
-  //       return {
-  //         ...trainee,
-  //         trend:
-  //           newIndex < oldIndex ? "up" : newIndex > oldIndex ? "down" : "same",
-  //       };
-  //     });
-  //   });
-
-  //   setTimeout(() => setIsUpdating(false), 500);
-  // }, []);
-
-  // Simulate real-time updates (for demonstration)
-  // useEffect(() => {
-  //   const interval = setInterval(updateRandomTrainee, 8000);
-  //   return () => clearInterval(interval);
-  // }, [updateRandomTrainee]);
-
-  // Get medal and crown based on current rank
   const getRankBadge = useCallback((rank) => {
     if (rank === 0)
       return {
@@ -376,11 +328,11 @@ const Dashboard = ({ darkMode }) => {
             }`}
           >
             {[
-              {
-                id: "leaderboard",
-                name: "Leaderboard",
-                icon: <Trophy size={18} />,
-              },
+              // {
+              //   id: "leaderboard",
+              //   name: "Leaderboard",
+              //   icon: <Trophy size={18} />,
+              // },
               {
                 id: "progress",
                 name: "Our Progress",
