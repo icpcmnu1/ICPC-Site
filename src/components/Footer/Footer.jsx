@@ -16,9 +16,9 @@ const Footer = ({ darkMode, setCurrentPage }) => {
       }`}
     >
       <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="flex flex-col gap-4">
-            {/* Logo */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+          {/* Logo Section */}
+          <div className="flex flex-col gap-4 items-center md:items-start">
             <div
               className="flex items-center gap-2 cursor-pointer"
               onClick={() => setCurrentPage("home")}
@@ -35,9 +35,8 @@ const Footer = ({ darkMode, setCurrentPage }) => {
               </span>
             </div>
 
-            {/* Text */}
             <p
-              className={`text-sm ${
+              className={`text-sm max-w-md ${
                 darkMode ? "text-gray-400" : "text-gray-600"
               }`}
             >
@@ -47,7 +46,8 @@ const Footer = ({ darkMode, setCurrentPage }) => {
             </p>
           </div>
 
-          <div>
+          {/* Quick Links */}
+          <div className="flex flex-col items-center md:items-start">
             <h3
               className={`font-semibold mb-4 ${
                 darkMode ? "text-white" : "text-gray-900"
@@ -79,7 +79,8 @@ const Footer = ({ darkMode, setCurrentPage }) => {
             </div>
           </div>
 
-          <div>
+          {/* Social Links */}
+          <div className="flex flex-col items-center md:items-start">
             <h3
               className={`font-semibold mb-4 ${
                 darkMode ? "text-white" : "text-gray-900"
@@ -87,9 +88,8 @@ const Footer = ({ darkMode, setCurrentPage }) => {
             >
               Connect With Us
             </h3>
-            <div className="flex gap-4">
+            <div className="flex gap-4 justify-center md:justify-start">
               {[
-                //{ icon: Github, href: "#", color: "gray" },
                 {
                   icon: Facebook,
                   href: "https://www.facebook.com/share/19QcYmDCRi/",
@@ -120,6 +120,7 @@ const Footer = ({ darkMode, setCurrentPage }) => {
                   key={index}
                   target="_blank"
                   href={social.href}
+                  rel="noopener noreferrer"
                   className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 ${
                     darkMode
                       ? "bg-gray-800 hover:bg-gray-700 text-white"
@@ -133,6 +134,7 @@ const Footer = ({ darkMode, setCurrentPage }) => {
           </div>
         </div>
 
+        {/* Copyright */}
         <div
           className={`border-t mt-8 pt-8 text-center ${
             darkMode

@@ -5,8 +5,8 @@ export const roadmapData = [
     icon: "🚀",
     goals: [
       "Learn basic syntax",
-      "Solve 100 problems",
-      "Participate in 5 contests",
+      "Solve 200 problems",
+      "Participate in 10 contests",
     ],
     duration: "4-6 weeks",
     resources: 12,

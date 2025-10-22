@@ -18,6 +18,18 @@ const Navbar = ({
   setCurrentPage,
   setMobileMenuOpen,
 }) => {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    scrollToTop();
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
@@ -33,7 +45,7 @@ const Navbar = ({
           {/* Logo */}
           <div
             className="flex items-center gap-2 cursor-pointer"
-            onClick={() => setCurrentPage("home")}
+            onClick={() => handlePageChange("home")}
           >
             <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center overflow-hidden transition-transform duration-300 hover:scale-110">
               <img
@@ -59,7 +71,7 @@ const Navbar = ({
             ].map((item) => (
               <button
                 key={item.name}
-                onClick={() => setCurrentPage(item.page)}
+                onClick={() => handlePageChange(item.page)}
                 className={`flex items-center gap-1 transition-all duration-200 ${
                   currentPage === item.page
                     ? darkMode
@@ -93,9 +105,11 @@ const Navbar = ({
               )}
             </button>
 
-            {/* Mobile Menu Button - يظهر فقط على الشاشات الصغيرة */}
             <button
-              onClick={() => setMobileMenuOpen(true)}
+              onClick={() => {
+                setMobileMenuOpen(true);
+                scrollToTop();
+              }}
               className={`p-2 rounded-full md:hidden ${
                 darkMode
                   ? "bg-gray-800 hover:bg-gray-700 text-white"

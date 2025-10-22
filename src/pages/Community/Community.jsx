@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { roleCategories, teamMembers, communityStats, topContributors, upcomingEvents } from "../../data/community";
 import {
   Github,
   Facebook,
@@ -20,10 +19,129 @@ import {
 
 const Community = ({ darkMode }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterRole, SetFilterRole] = useState("all");
+  const [filterRole, setFilterRole] = useState("all");
   const [activeMember, setActiveMember] = useState(null);
   const [showFilterMenu, setShowFilterMenu] = useState(false);
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const filterMenuRef = useRef(null);
+
+  // Role categories
+  const roleCategories = [
+    { key: "all", label: "All" },
+    {
+      key: "high_board",
+      label: "High Board",
+      keywords: ["president", "vice president", "community manager"],
+    },
+    { key: "heads", label: "Heads", keywords: ["head"] },
+    { key: "mentor", label: "Mentor", keywords: ["mentor", "instructor"] },
+    {
+      key: "problem_setter",
+      label: "Problem Setters",
+      keywords: ["problem setter", "problem setting"],
+    },
+    {
+      key: "organizer",
+      label: "Organizer",
+      keywords: [
+        "organizer",
+        "organiser",
+        "organizers head",
+        "vice head organiser",
+      ],
+    },
+    { key: "hr", label: "HR", keywords: ["hr"] },
+    {
+      key: "media",
+      label: "Media",
+      keywords: ["media", "content writer", "video editor"],
+    },
+  ];
+
+  // Upcoming events
+  const upcomingEvents = [
+    {
+      title: "Weekly Coding Contest",
+      date: "Tomorrow, 7:00 PM",
+      participants: 45,
+      type: "Contest",
+    },
+    {
+      title: "Data Structures Workshop",
+      date: "Saturday, 5:00 PM",
+      participants: 32,
+      type: "Workshop",
+    },
+    {
+      title: "Algorithm Study Group",
+      date: "Sunday, 4:00 PM",
+      participants: 28,
+      type: "Study Group",
+    },
+  ];
+
+  useEffect(() => {
+    async function fetchTeamMembers() {
+      try {
+        setIsLoading(true);
+        const response = await fetch(
+          "https://opensheet.elk.sh/1VF6w6SKcT9EkDjmGVjpRJZ2aMZ4hzSgXHCeJd4h0iPM/Sheet1"
+        );
+        const data = await response.json();
+
+        const formatted = data.map((member) => ({
+          id: Number(member.id),
+          name: member.name,
+          role: member.role,
+          image: member.image,
+          about: member.about,
+          rating: Number(member.rating) || 0,
+          skills: member.skills ? member.skills.split(",") : [],
+          links: member.links
+            ? member.links.split(",").reduce((acc, link) => {
+                const [platform, url] = link.split(":");
+                if (platform && url) {
+                  acc[platform.trim()] = url.trim();
+                }
+                return acc;
+              }, {})
+            : {},
+        }));
+
+        setTeamMembers(formatted);
+      } catch (error) {
+        console.error("Error fetching team members:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchTeamMembers();
+  }, []);
+
+  // Calculate community stats from team members
+  const communityStats = {
+    totalMembers: teamMembers.length,
+    activeThisWeek: teamMembers.filter((member) => member.rating >= 4).length,
+    problemsSolved: teamMembers.reduce(
+      (sum, member) => sum + (member.skills?.length || 0) * 10,
+      0
+    ),
+    contestsParticipated:
+      teamMembers.filter(
+        (member) =>
+          member.role.toLowerCase().includes("problem setter") ||
+          member.role.toLowerCase().includes("mentor")
+      ).length * 5,
+  };
+
+  // Top contributors (you can customize this logic)
+  const topContributors = teamMembers.slice(0, 3).map((member, index) => ({
+    ...member,
+    contributions: Math.floor(member.rating * 30 + member.skills?.length * 2),
+    rank: index + 1,
+  }));
 
   // Close filter menu on outside click
   useEffect(() => {
@@ -40,7 +158,6 @@ const Community = ({ darkMode }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [showFilterMenu]);
 
-
   // Filter members based on search and role filter
   const filteredMembers = teamMembers.filter((member) => {
     const memberRoleLc = member.role.toLowerCase();
@@ -50,13 +167,14 @@ const Community = ({ darkMode }) => {
       member.name.toLowerCase().includes(searchLc) ||
       memberRoleLc.includes(searchLc);
 
-    // Category-based filtering (if filterRole matches a category key)
+    // Category-based filtering
     const activeCategory = roleCategories.find((c) => c.key === filterRole);
     let matchesRole = true;
     if (activeCategory && activeCategory.key !== "all") {
-      matchesRole = activeCategory.keywords?.some((kw) => memberRoleLc.includes(kw)) ?? true;
+      matchesRole =
+        activeCategory.keywords?.some((kw) => memberRoleLc.includes(kw)) ??
+        true;
     } else if (filterRole !== "all" && !activeCategory) {
-      // Exact role match if a specific role name was chosen
       matchesRole = memberRoleLc === filterRole.toLowerCase();
     }
 
@@ -64,7 +182,7 @@ const Community = ({ darkMode }) => {
   });
 
   // Get unique roles for filter
-  const Roles = [...new Set(teamMembers.map((member) => member.role))];
+  const uniqueRoles = [...new Set(teamMembers.map((member) => member.role))];
 
   // Stats cards data
   const stats = [
@@ -94,6 +212,22 @@ const Community = ({ darkMode }) => {
     },
   ];
 
+  if (isLoading) {
+    return (
+      <div
+        className={`min-h-screen flex items-center justify-center ${
+          darkMode ? "bg-gray-900" : "bg-gray-50"
+        }`}
+      >
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-500 mx-auto"></div>
+          <p className={`mt-4 ${darkMode ? "text-white" : "text-gray-700"}`}>
+            Loading community data...
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -202,9 +336,11 @@ const Community = ({ darkMode }) => {
                   >
                     <Filter className="w-5 h-5" />
                     <span>
-                      {roleCategories.find((c) => c.key === filterRole)?.label ||
-                        filterRole === "all"
-                        ? "Filter: " + (roleCategories.find((c) => c.key === filterRole)?.label || "All")
+                      {roleCategories.find((c) => c.key === filterRole)
+                        ?.label || filterRole === "all"
+                        ? "Filter: " +
+                          (roleCategories.find((c) => c.key === filterRole)
+                            ?.label || "All")
                         : "Filter"}
                     </span>
                   </button>
@@ -212,46 +348,76 @@ const Community = ({ darkMode }) => {
                   {showFilterMenu && (
                     <div
                       className={`absolute right-0 mt-2 w-60 rounded-xl shadow-lg border z-10 ${
-                        darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"
+                        darkMode
+                          ? "bg-gray-800 border-gray-700"
+                          : "bg-white border-gray-200"
                       }`}
                       role="menu"
                     >
                       <div className="p-2">
-                        <p className={`px-2 pb-1 text-xs ${darkMode ? "text-gray-400" : "text-gray-500"}`}>Categories</p>
+                        <p
+                          className={`px-2 pb-1 text-xs ${
+                            darkMode ? "text-gray-400" : "text-gray-500"
+                          }`}
+                        >
+                          Categories
+                        </p>
                         {roleCategories.map((cat) => (
                           <button
                             key={cat.key}
                             onClick={() => {
-                              SetFilterRole(cat.key);
+                              setFilterRole(cat.key);
                               setShowFilterMenu(false);
                             }}
                             className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
                               darkMode
                                 ? "hover:bg-gray-700 text-white"
                                 : "hover:bg-gray-100 text-gray-900"
-                            } ${filterRole === cat.key ? (darkMode ? "bg-gray-700" : "bg-gray-100") : ""}`}
+                            } ${
+                              filterRole === cat.key
+                                ? darkMode
+                                  ? "bg-gray-700"
+                                  : "bg-gray-100"
+                                : ""
+                            }`}
                             role="menuitem"
                           >
                             {cat.label}
                           </button>
                         ))}
 
-                        <div className={`my-2 h-px ${darkMode ? "bg-gray-700" : "bg-gray-200"}`} />
+                        <div
+                          className={`my-2 h-px ${
+                            darkMode ? "bg-gray-700" : "bg-gray-200"
+                          }`}
+                        />
 
-                        <p className={`px-2 pb-1 text-xs ${darkMode ? "text-gray-400" : "text-gray-500"}`}>Exact Roles</p>
+                        <p
+                          className={`px-2 pb-1 text-xs ${
+                            darkMode ? "text-gray-400" : "text-gray-500"
+                          }`}
+                        >
+                          Exact Roles
+                        </p>
                         <div className="max-h-48 overflow-auto pr-1">
-                          {[...new Set(teamMembers.map((m) => m.role))].map((role) => (
+                          {uniqueRoles.map((role) => (
                             <button
                               key={role}
                               onClick={() => {
-                                SetFilterRole(role);
+                                setFilterRole(role);
                                 setShowFilterMenu(false);
                               }}
                               className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
                                 darkMode
                                   ? "hover:bg-gray-700 text-white"
                                   : "hover:bg-gray-100 text-gray-900"
-                              } ${filterRole === role ? (darkMode ? "bg-gray-700" : "bg-gray-100") : ""}`}
+                              } ${
+                                filterRole === role
+                                  ? darkMode
+                                    ? "bg-gray-700"
+                                    : "bg-gray-100"
+                                  : ""
+                              }`}
                               role="menuitem"
                             >
                               {role}
@@ -267,9 +433,9 @@ const Community = ({ darkMode }) => {
 
             {/* Members Grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredMembers.map((member, index) => (
+              {filteredMembers.map((member) => (
                 <div
-                  key={index}
+                  key={member.id}
                   className={`${
                     darkMode
                       ? "bg-gray-800 hover:bg-gray-700"
@@ -284,6 +450,11 @@ const Community = ({ darkMode }) => {
                         src={member.image}
                         alt={member.name}
                         className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                            member.name
+                          )}&background=random`;
+                        }}
                       />
                     </div>
                     <h3
@@ -399,48 +570,85 @@ const Community = ({ darkMode }) => {
               </h2>
 
               <div className="space-y-4">
-                {topContributors.map((contributor, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <div className="relative">
-                      <img
-                        src={contributor.image}
-                        alt={contributor.name}
-                        className="w-10 h-10 rounded-full object-cover"
-                      />
-                      {contributor.rank === 1 && (
-                        <div className="absolute -top-1 -right-1 w-5 h-5 bg-yellow-500 rounded-full flex items-center justify-center">
-                          <Crown className="w-3 h-3 text-white" />
-                        </div>
-                      )}
-                    </div>
-                    <div className="flex-1">
-                      <h3
-                        className={`font-medium ${
-                          darkMode ? "text-white" : "text-gray-900"
-                        }`}
-                      >
-                        {contributor.name}
-                      </h3>
-                      <div className="flex items-center gap-1">
-                        <Star className="w-3 h-3 text-yellow-500 fill-current" />
-                        <span
-                          className={`text-xs ${
-                            darkMode ? "text-gray-400" : "text-gray-600"
+                {topContributors
+                  .sort((a, b) => {
+                    // أولاً حسب التقييم، ثم حسب عدد المساهمات إذا كان التقييم متساوي
+                    if (b.rating !== a.rating) {
+                      return b.rating - a.rating;
+                    }
+                    return b.contributions - a.contributions;
+                  })
+                  .slice(0, 3)
+                  .map((contributor, index) => (
+                    <div
+                      key={contributor.id}
+                      className="flex items-center gap-3"
+                    >
+                      <div className="relative">
+                        <img
+                          src={contributor.image}
+                          alt={contributor.name}
+                          className="w-10 h-10 rounded-full object-cover"
+                          onError={(e) => {
+                            e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                              contributor.name
+                            )}&background=random`;
+                          }}
+                        />
+                        {index === 0 && (
+                          <div className="absolute -top-1 -right-1 w-5 h-5 bg-yellow-500 rounded-full flex items-center justify-center">
+                            <Crown className="w-3 h-3 text-white" />
+                          </div>
+                        )}
+                      </div>
+                      <div className="flex-1">
+                        <h3
+                          className={`font-medium ${
+                            darkMode ? "text-white" : "text-gray-900"
                           }`}
                         >
-                          {contributor.rating}/5
-                        </span>
+                          {contributor.name}
+                        </h3>
+                        <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-1">
+                            <Star className="w-3 h-3 text-yellow-500 fill-current" />
+                            <span
+                              className={`text-xs ${
+                                darkMode ? "text-gray-400" : "text-gray-600"
+                              }`}
+                            >
+                              {contributor.rating}/5
+                            </span>
+                          </div>
+                          <span
+                            className={`text-xs ${
+                              darkMode ? "text-gray-500" : "text-gray-400"
+                            }`}
+                          >
+                            •
+                          </span>
+                          <span
+                            className={`text-xs ${
+                              darkMode ? "text-gray-400" : "text-gray-600"
+                            }`}
+                          >
+                            {contributor.contributions} contributions
+                          </span>
+                        </div>
                       </div>
-                      <p
-                        className={`text-xs ${
-                          darkMode ? "text-gray-400" : "text-gray-600"
+                      <div
+                        className={`text-sm font-bold ${
+                          index === 0
+                            ? "text-yellow-500"
+                            : index === 1
+                            ? "text-gray-400"
+                            : "text-orange-500"
                         }`}
                       >
-                        {contributor.contributions} contributions
-                      </p>
+                        #{index + 1}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </div>
             </div>
 
@@ -573,6 +781,11 @@ const Community = ({ darkMode }) => {
                     src={activeMember.image}
                     alt={activeMember.name}
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                        activeMember.name
+                      )}&background=random`;
+                    }}
                   />
                 </div>
                 <h3
@@ -596,7 +809,7 @@ const Community = ({ darkMode }) => {
                       darkMode ? "text-gray-400" : "text-gray-600"
                     }`}
                   >
-                    {activeMember.rating}/5 
+                    {activeMember.rating}/5
                   </span>
                 </div>
               </div>

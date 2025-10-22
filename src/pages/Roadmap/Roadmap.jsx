@@ -24,7 +24,6 @@ import {
   AlertCircle,
   Lightbulb,
 } from "lucide-react";
-import { weeklyChallenges } from "./weeklyChallenge";
 
 const Roadmap = ({ darkMode }) => {
   const [expandedLevel, setExpandedLevel] = useState(null);
@@ -39,66 +38,58 @@ const Roadmap = ({ darkMode }) => {
   const [showResult, setShowResult] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [celebrating, setCelebrating] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Sample roadmap data
-  const roadmapData = [
-    {
-      level: 0,
-      title: "Programming Fundamentals",
-      icon: Code,
-      color: "from-blue-500 to-cyan-500",
-      problems: 150,
-      contests: 8,
-      topics: [
-        "Variables & Data Types",
-        "Loops & Conditions",
-        "Functions",
-        "Arrays",
-        "Strings",
-        "Basic Math",
-      ],
-      resources: [
-        "C++ Basics Sheet",
-        "Problem Solving Beginner",
-        "HackerRank 30 Days",
-      ],
-    },
-    {
-      level: 1,
-      title: "Data Structures & Algorithms",
-      icon: Database,
-      color: "from-purple-500 to-pink-500",
-      problems: 200,
-      contests: 12,
-      topics: [
-        "Stack & Queue",
-        "Linked Lists",
-        "Trees",
-        "Sorting",
-        "Searching",
-        "Recursion",
-      ],
-      resources: ["DS & Algo Sheet", "LeetCode Easy", "GeeksforGeeks Practice"],
-    },
-    {
-      level: 2,
-      title: "Advanced Algorithms",
-      icon: Brain,
-      color: "from-green-500 to-teal-500",
-      problems: 250,
-      contests: 15,
-      topics: [
-        "Dynamic Programming",
-        "Graph Algorithms",
-        "Greedy",
-        "Divide & Conquer",
-        "Number Theory",
-      ],
-      resources: ["Codeforces Gym", "AtCoder Problems", "SPOJ Classical"],
-    },
-  ];
+  // Fetch weekly challenge from API
+  useEffect(() => {
+    async function fetchWeeklyChallenge() {
+      try {
+        setIsLoading(true);
+        const response = await fetch(
+          "https://opensheet.elk.sh/1kyupfScwO_7AhRj40JTyrTrObavX1lrR9kT53o7aqTc/Sheet1"
+        );
+        const data = await response.json();
 
-  // Simulate user progress data
+        if (data && data.length > 0) {
+          const challenge = data[0];
+          const formattedChallenge = {
+            id: Number(challenge.id),
+            question: challenge.question,
+            options: challenge.options ? challenge.options.split(",") : [],
+            correctAnswer: Number(challenge.correctAnswer),
+            explanation: challenge.explanation,
+            questionHash: btoa(challenge.question),
+          };
+
+          setCurrentChallenge(formattedChallenge);
+
+          const completedChallenges = JSON.parse(
+            localStorage.getItem("completedChallenges") || "{}"
+          );
+
+          const savedAnswer =
+            completedChallenges[formattedChallenge.questionHash];
+          if (savedAnswer) {
+            setSelectedAnswer(savedAnswer.selectedAnswer);
+            setShowResult(true);
+            setIsCorrect(savedAnswer.isCorrect);
+          } else {
+            setSelectedAnswer(null);
+            setShowResult(false);
+            setIsCorrect(false);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching weekly challenge:", error);
+        // Fallback challenge...
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchWeeklyChallenge();
+  }, []);
+
   useEffect(() => {
     const userProgress = {
       0: { completed: 120, total: 150 },
@@ -106,20 +97,6 @@ const Roadmap = ({ darkMode }) => {
       2: { completed: 30, total: 250 },
     };
     setProgress(userProgress);
-  }, []);
-
-  useEffect(() => {
-    const currentChallengeId = localStorage.getItem("currentChallengeId") || 1;
-    const challenge = weeklyChallenges.find((c) => c.id == currentChallengeId);
-    setCurrentChallenge(challenge);
-
-    const completedChallenges = JSON.parse(
-      localStorage.getItem("completedChallenges") || "{}"
-    );
-    if (completedChallenges[challenge.id]) {
-      setShowResult(true);
-      setIsCorrect(completedChallenges[challenge.id].isCorrect);
-    }
   }, []);
 
   // Simulate success stories data
@@ -190,7 +167,7 @@ const Roadmap = ({ darkMode }) => {
   };
 
   const submitAnswer = () => {
-    if (selectedAnswer === null) return;
+    if (selectedAnswer === null || !currentChallenge) return;
 
     const correct = selectedAnswer === currentChallenge.correctAnswer;
     setIsCorrect(correct);
@@ -199,9 +176,11 @@ const Roadmap = ({ darkMode }) => {
     const completedChallenges = JSON.parse(
       localStorage.getItem("completedChallenges") || "{}"
     );
-    completedChallenges[currentChallenge.id] = {
+    completedChallenges[currentChallenge.questionHash] = {
       isCorrect: correct,
       selectedAnswer: selectedAnswer,
+      timestamp: new Date().toISOString(),
+      questionId: currentChallenge.id,
     };
     localStorage.setItem(
       "completedChallenges",
@@ -228,6 +207,81 @@ const Roadmap = ({ darkMode }) => {
     setSelectedAnswer(null);
     setIsCorrect(false);
   };
+
+  // Sample roadmap data
+  const roadmapData = [
+    {
+      level: 0,
+      title: "Programming Fundamentals",
+      icon: Code,
+      color: "from-blue-500 to-cyan-500",
+      problems: 150,
+      contests: 8,
+      topics: [
+        "Variables & Data Types",
+        "Loops & Conditions",
+        "Functions",
+        "Arrays",
+        "Strings",
+        "Basic Math",
+      ],
+      resources: [
+        "C++ Basics Sheet",
+        "Problem Solving Beginner",
+        "HackerRank 30 Days",
+      ],
+    },
+    {
+      level: 1,
+      title: "Data Structures & Algorithms",
+      icon: Database,
+      color: "from-purple-500 to-pink-500",
+      problems: 200,
+      contests: 12,
+      topics: [
+        "Stack & Queue",
+        "Linked Lists",
+        "Trees",
+        "Sorting",
+        "Searching",
+        "Recursion",
+      ],
+      resources: ["DS & Algo Sheet", "LeetCode Easy", "GeeksforGeeks Practice"],
+    },
+    {
+      level: 2,
+      title: "Advanced Algorithms",
+      icon: Brain,
+      color: "from-green-500 to-teal-500",
+      problems: 250,
+      contests: 15,
+      topics: [
+        "Dynamic Programming",
+        "Graph Algorithms",
+        "Greedy",
+        "Divide & Conquer",
+        "Number Theory",
+      ],
+      resources: ["Codeforces Gym", "AtCoder Problems", "SPOJ Classical"],
+    },
+  ];
+
+  if (isLoading) {
+    return (
+      <div
+        className={`min-h-screen flex items-center justify-center ${
+          darkMode ? "bg-gray-900" : "bg-gray-50"
+        }`}
+      >
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-500 mx-auto"></div>
+          <p className={`mt-4 ${darkMode ? "text-white" : "text-gray-700"}`}>
+            Loading challenge...
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -647,7 +701,7 @@ const Roadmap = ({ darkMode }) => {
                 }`}
               >
                 <Target className="mr-2 text-red-500" />
-                Challenge of the week{" "}
+                Challenge of the Week
                 {showResult && isCorrect && (
                   <span className="ml-2 text-green-500">✓</span>
                 )}
@@ -684,13 +738,17 @@ const Roadmap = ({ darkMode }) => {
                           } ${
                             showResult &&
                             index === currentChallenge.correctAnswer
-                              ? "bg-green-100 text-green-800 border border-green-300"
+                              ? darkMode
+                                ? "bg-green-800 text-green-200 border border-green-600"
+                                : "bg-green-100 text-green-800 border border-green-300"
                               : ""
                           } ${
                             showResult &&
                             selectedAnswer === index &&
                             selectedAnswer !== currentChallenge.correctAnswer
-                              ? "bg-red-100 text-red-800 border border-red-300"
+                              ? darkMode
+                                ? "bg-red-800 text-red-200 border border-red-600"
+                                : "bg-red-100 text-red-800 border border-red-300"
                               : ""
                           }`}
                         >
@@ -701,7 +759,18 @@ const Roadmap = ({ darkMode }) => {
                               } ${
                                 showResult &&
                                 index === currentChallenge.correctAnswer
-                                  ? "bg-green-300 text-green-800"
+                                  ? darkMode
+                                    ? "bg-green-600 text-green-200"
+                                    : "bg-green-300 text-green-800"
+                                  : ""
+                              } ${
+                                showResult &&
+                                selectedAnswer === index &&
+                                selectedAnswer !==
+                                  currentChallenge.correctAnswer
+                                  ? darkMode
+                                    ? "bg-red-600 text-red-200"
+                                    : "bg-red-300 text-red-800"
                                   : ""
                               }`}
                             >
@@ -717,7 +786,11 @@ const Roadmap = ({ darkMode }) => {
                       <div
                         className={`mt-4 p-3 rounded-lg ${
                           isCorrect
-                            ? "bg-green-100 text-green-800"
+                            ? darkMode
+                              ? "bg-green-800 text-green-200"
+                              : "bg-green-100 text-green-800"
+                            : darkMode
+                            ? "bg-red-800 text-red-200"
                             : "bg-red-100 text-red-800"
                         }`}
                       >
@@ -730,7 +803,7 @@ const Roadmap = ({ darkMode }) => {
                           <div>
                             <p className="font-semibold">
                               {isCorrect
-                                ? "Correct answer! Congratulations!"
+                                ? "Correct answer! Congratulations! 🎉"
                                 : `Wrong answer. The correct answer is: ${
                                     currentChallenge.options[
                                       currentChallenge.correctAnswer
@@ -754,33 +827,27 @@ const Roadmap = ({ darkMode }) => {
                       <button
                         onClick={submitAnswer}
                         disabled={selectedAnswer === null}
-                        className={`px-4 py-2 rounded-full ${
+                        className={`px-6 py-2 rounded-full font-medium ${
                           selectedAnswer === null
                             ? "bg-gray-400 cursor-not-allowed"
                             : darkMode
                             ? "bg-blue-600 hover:bg-blue-700"
                             : "bg-blue-500 hover:bg-blue-600"
-                        } text-white`}
+                        } text-white transition-colors`}
                       >
-                        Confirm the answer{" "}
+                        Submit Answer
                       </button>
-                    ) : // ) : (
-                    //   <div className="text-sm">
-                    //     {isCorrect
-                    //       ? "You have successfully completed this challenge!"
-                    //       : "Try again next week!"}
-                    //   </div>
-                    // )
-                    null}
-                    {/* Reset Button */}
-                    {/* {import.meta.env.MODE === "development" && (
-                      <button
-                        onClick={ResetChallenge}
-                        className="text-xs text-gray-500 hover:text-gray-700"
+                    ) : (
+                      <div
+                        className={`text-sm font-medium ${
+                          isCorrect ? "text-green-500" : "text-red-500"
+                        }`}
                       >
-                        Reset
-                      </button>
-                    )} */}
+                        {isCorrect
+                          ? "🎉 Answer Submitted!"
+                          : "💡 Answer Submitted!"}
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
