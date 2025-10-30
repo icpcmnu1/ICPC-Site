@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   Github,
   Facebook,
-  Instagram,
   Linkedin,
   Mail,
   Search,
@@ -90,24 +89,25 @@ const Community = ({ darkMode }) => {
         );
         const data = await response.json();
 
-        const formatted = data.map((member) => ({
-          id: Number(member.id),
-          name: member.name,
-          role: member.role,
-          image: member.image,
-          about: member.about,
-          rating: Number(member.rating) || 0,
-          skills: member.skills ? member.skills.split(",") : [],
-          links: member.links
-            ? member.links.split(",").reduce((acc, link) => {
-                const [platform, url] = link.split(":");
-                if (platform && url) {
-                  acc[platform.trim()] = url.trim();
-                }
-                return acc;
-              }, {})
-            : {},
-        }));
+        const formatted = data.map((member) => {
+          const links = {};
+
+          if (member.facebook) links.facebook = member.facebook;
+          if (member.linkedin) links.linkedin = member.linkedin;
+          if (member.mail) links.mail = member.mail;
+          if (member.github) links.github = member.github;
+
+          return {
+            id: Number(member.id),
+            name: member.name,
+            role: member.role,
+            image: member.image,
+            about: member.about,
+            rating: Number(member.rating) || 0,
+            skills: member.skills ? member.skills.split(",") : [],
+            links: links,
+          };
+        });
 
         setTeamMembers(formatted);
       } catch (error) {
@@ -211,6 +211,41 @@ const Community = ({ darkMode }) => {
       color: "text-orange-500",
     },
   ];
+
+  // Function to render social links
+  const renderSocialLinks = (links) => {
+    const socialPlatforms = [
+      { key: "github", icon: Github, label: "GitHub" },
+      { key: "facebook", icon: Facebook, label: "Facebook" },
+      { key: "linkedin", icon: Linkedin, label: "LinkedIn" },
+      { key: "mail", icon: Mail, label: "Email" },
+    ];
+
+    return socialPlatforms
+      .map((platform) => {
+        if (links[platform.key]) {
+          const Icon = platform.icon;
+          return (
+            <a
+              key={platform.key}
+              href={links[platform.key]}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                darkMode
+                  ? "bg-gray-700 hover:bg-gray-600 text-white"
+                  : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+              } transition-colors duration-200`}
+              title={platform.label}
+            >
+              <Icon className="w-4 h-4" />
+            </a>
+          );
+        }
+        return null;
+      })
+      .filter(Boolean);
+  };
 
   if (isLoading) {
     return (
@@ -483,37 +518,9 @@ const Community = ({ darkMode }) => {
                     </div>
                   </div>
 
+                  {/* Social Links */}
                   <div className="flex justify-center gap-3 mb-4">
-                    {Object.entries(member.links).map(
-                      ([platform, url], idx) => {
-                        const Icon =
-                          platform === "github"
-                            ? Github
-                            : platform === "linkedin"
-                            ? Linkedin
-                            : platform === "instagram"
-                            ? Instagram
-                            : platform === "facebook"
-                            ? Facebook
-                            : Mail;
-                        return (
-                          <a
-                            key={idx}
-                            href={url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                              darkMode
-                                ? "bg-gray-700 hover:bg-gray-600 text-white"
-                                : "bg-gray-100 hover:bg-gray-200 text-gray-700"
-                            } transition-colors duration-200`}
-                            title={platform}
-                          >
-                            <Icon className="w-4 h-4" />
-                          </a>
-                        );
-                      }
-                    )}
+                    {renderSocialLinks(member.links)}
                   </div>
 
                   <div className="text-center">
@@ -572,7 +579,6 @@ const Community = ({ darkMode }) => {
               <div className="space-y-4">
                 {topContributors
                   .sort((a, b) => {
-                    // أولاً حسب التقييم، ثم حسب عدد المساهمات إذا كان التقييم متساوي
                     if (b.rating !== a.rating) {
                       return b.rating - a.rating;
                     }
@@ -765,13 +771,19 @@ const Community = ({ darkMode }) => {
       {/* Member Detail Modal */}
       {activeMember && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+          className="fixed inset-0 flex items-center justify-center p-4 z-50"
           onClick={() => setActiveMember(null)}
         >
+          {/* Overlay مع blur */}
+          <div className="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm"></div>
+
+          {/* Modal Content */}
           <div
-            className={`max-w-md w-full rounded-2xl shadow-lg ${
-              darkMode ? "bg-gray-800" : "bg-white"
-            } overflow-hidden`}
+            className={`relative max-w-md w-full rounded-2xl shadow-2xl ${
+              darkMode
+                ? "bg-gray-800 border border-gray-600"
+                : "bg-white border border-gray-300"
+            } overflow-hidden transform transition-all duration-300 scale-95 hover:scale-100`}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-6">
@@ -854,46 +866,17 @@ const Community = ({ darkMode }) => {
               </div>
 
               <div className="flex justify-center gap-3 mb-6">
-                {Object.entries(activeMember.links).map(
-                  ([platform, url], idx) => {
-                    const Icon =
-                      platform === "github"
-                        ? Github
-                        : platform === "linkedin"
-                        ? Linkedin
-                        : platform === "instagram"
-                        ? Instagram
-                        : platform === "facebook"
-                        ? Facebook
-                        : Mail;
-                    return (
-                      <a
-                        key={idx}
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                          darkMode
-                            ? "bg-gray-700 hover:bg-gray-600 text-white"
-                            : "bg-gray-100 hover:bg-gray-200 text-gray-700"
-                        } transition-colors duration-200`}
-                        title={platform}
-                      >
-                        <Icon className="w-5 h-5" />
-                      </a>
-                    );
-                  }
-                )}
+                {renderSocialLinks(activeMember.links)}
               </div>
 
               <div className="flex justify-center">
                 <button
                   onClick={() => setActiveMember(null)}
-                  className={`px-6 py-3 rounded-lg ${
+                  className={`px-6 py-3 rounded-lg transition-colors ${
                     darkMode
-                      ? "bg-gray-700 hover:bg-gray-600 text-white"
-                      : "bg-gray-100 hover:bg-gray-200 text-gray-700"
-                  } transition-colors`}
+                      ? "bg-gray-700 hover:bg-gray-600 text-white border border-gray-600"
+                      : "bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-300"
+                  }`}
                 >
                   Close
                 </button>

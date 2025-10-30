@@ -1,6 +1,5 @@
 {
   "name": "minia-icpc-website",
-  "homepage": "https://icpcmnu1.github.io/ICPC-Site/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
