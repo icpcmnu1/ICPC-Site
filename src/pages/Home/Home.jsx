@@ -126,9 +126,9 @@ const HomePage = ({ darkMode, setCurrentPage }) => {
           >
             {[
               { number: "130+", label: "trainees" },
-              { number: "0", label: "Contests" },
+              { number: "3", label: "Contests" },
               { number: "1", label: "ECPC Finals" },
-              { number: "6", label: "Divisions" }, // Techical , admins , media team , HR , OT
+              { number: "6", label: "Divisions" },
             ].map((stat, index) => (
               <div
                 key={index}
