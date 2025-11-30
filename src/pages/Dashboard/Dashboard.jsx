@@ -5,8 +5,6 @@ import {
   Medal,
   Users,
   Code,
-  ChevronUp,
-  ChevronDown,
   Search,
   TrendingUp as TrendingUpIcon,
   Clock as ClockIcon,
@@ -16,9 +14,8 @@ import {
   CheckCircle,
   Calendar,
   TrendingUp,
-  Clock,
-  Star,
   Zap,
+  Star,
 } from "lucide-react";
 import { communityProgress } from "../../data/communityData";
 import { roadmapData } from "../../data/roadmapData";
@@ -27,7 +24,7 @@ const Dashboard = ({ darkMode }) => {
   const [activeTab, setActiveTab] = useState("leaderboard");
   const [mainLeaderboard, setMainLeaderboard] = useState([]);
   const [contestLeaderboard, setContestLeaderboard] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, SetSearchTerm] = useState("");
   const [SortBy, setSortBy] = useState("solved");
   const [hoveredStat, setHoveredStat] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -526,7 +523,7 @@ const Dashboard = ({ darkMode }) => {
                 </h2>
 
                 {/* Search Bar - Improved for mobile */}
-                <div className={`relative w-full md:w-64`}>
+                {/* <div className={`relative w-full md:w-64`}>
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 md:w-5 md:h-5" />
                   <input
                     type="text"
@@ -539,7 +536,7 @@ const Dashboard = ({ darkMode }) => {
                         : "bg-white border-gray-300 text-gray-900 placeholder-gray-500"
                     } focus:outline-none focus:ring-2 focus:ring-purple-500`}
                   />
-                </div>
+                </div> */}
               </div>
 
               {/* Podium for top 3 */}
