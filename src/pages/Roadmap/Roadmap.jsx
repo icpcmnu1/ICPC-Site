@@ -291,7 +291,7 @@ const Roadmap = ({ darkMode }) => {
     >
       {/* Celebration effect */}
       {celebrating && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-70">
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/40 backdrop-blur-md">
           <div className="text-center p-8 rounded-2xl bg-gradient-to-r from-green-400 to-blue-500 text-white">
             <PartyPopper size={64} className="mx-auto mb-4 animate-bounce" />
             <h2 className="text-3xl font-bold mb-2">Congrats!</h2>
