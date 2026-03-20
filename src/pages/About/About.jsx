@@ -1,5 +1,5 @@
 import React from "react";
-import { Star, Trophy, Users, Award } from "lucide-react";
+import { Star, Trophy, Users, Award, GraduationCap } from "lucide-react";
 import { divisions } from "../../data/aboutData";
 
 const About = ({ darkMode }) => {
@@ -57,6 +57,13 @@ const About = ({ darkMode }) => {
               content:
                 "Multiple ECPC finals appearances and recognition as one of Egypt's top university communities.",
               icon: <Award className="w-6 h-6" />,
+            },
+            {
+              year: "2025",
+              title: "Growing Stronger",
+              content:
+                "Launched our first newcomers training with 100+ trainees, many of whom completed the level and stood out.",
+              icon: <GraduationCap className="w-6 h-6" />,
             },
           ].map((item, index) => (
             <div key={index} className="flex gap-8 items-start group">

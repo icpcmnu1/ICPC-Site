@@ -10,7 +10,7 @@ import {
   Sun,
   Menu,
 } from "lucide-react";
-
+import logo from "../../assets/images/icon_Com.jpg";
 const Navbar = ({
   darkMode,
   setDarkMode,
@@ -49,7 +49,7 @@ const Navbar = ({
           >
             <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center overflow-hidden transition-transform duration-300 hover:scale-110">
               <img
-                src="https://github.com/Mazen-mo-10/imgs/blob/main/icon_Com.jpg?raw=true"
+                src={logo}
                 alt="ICPC MNU Logo"
                 className="w-full h-full object-cover"
               />

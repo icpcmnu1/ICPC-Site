@@ -24,6 +24,9 @@ import {
   AlertCircle,
   Lightbulb,
 } from "lucide-react";
+import mazenImg from "../../assets/images/Mazen_Img.jpg";
+import anasImg from "../../assets/images/Anas_Img.jpeg";
+import ziadImg from "../../assets/images/Ziad_Img.jpeg";
 
 const Roadmap = ({ darkMode }) => {
   const [expandedLevel, setExpandedLevel] = useState(null);
@@ -108,8 +111,7 @@ const Roadmap = ({ darkMode }) => {
         achievement: "ECPC Final competition and Codeforces Pupil",
         story:
           "I started gradually from scratch and continued to raise my level, solve many problems, and I will continue to achieve greater achievements.",
-        image:
-          "https://github.com/Mazen-mo-10/imgs/blob/main/MazenImg.jpg?raw=true",
+        image: mazenImg,
       },
       {
         name: "Anas Desouky",
@@ -117,8 +119,7 @@ const Roadmap = ({ darkMode }) => {
         achievement: "AI Engineer",
         story:
           "I loved problem solving and became interested in it and strengthened myself in data structure and algorithms.",
-        image:
-          "https://github.com/Mazen-mo-10/imgs/blob/main/Anas_Img.jpeg?raw=true",
+        image: anasImg,
       },
       {
         name: "Ziad Ayman",
@@ -126,8 +127,7 @@ const Roadmap = ({ darkMode }) => {
         achievement: "Codeforces Expert",
         story:
           "The roadmap helped me build a strong foundation in algorithms and data structures which enabled me to get solve 1400 problem.",
-        image:
-          "https://github.com/Mazen-mo-10/imgs/blob/main/Ziad_Img.jpeg?raw=true",
+        image: ziadImg,
       },
     ];
     setSuccessStories(stories);

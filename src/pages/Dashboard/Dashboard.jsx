@@ -35,28 +35,52 @@ const Dashboard = ({ darkMode }) => {
       try {
         setIsLoading(true);
         const response = await fetch(
-          "https://opensheet.elk.sh/1sOnN7xwRtKDOwlONDXYFGWGqJJMmkmPWHUs8uY-3IjI/Sheet1"
+          `https://sheets.googleapis.com/v4/spreadsheets/1aNz_0DFsrGoepoyvG9Jif5ws5jxGhTr15wCBohSd4nU/values/Standing?key=AIzaSyBvdLuTZI-QGaGVCVolstyxC4Qpvxq7kUQ`,
         );
-        const data = await response.json();
+        const json = await response.json();
 
-        const formatted = data.map((t) => ({
-          id: Number(t.id),
-          name: t.name,
-          handle: t.handle,
-          solved: Number(t.solved) || 0,
-          contest: Number(t.contest) || 0,
-          avatar: t.avatar || "👨‍💻",
-        }));
+        const avatars = [
+          "💎",
+          "👨‍💻",
+          "🎯",
+          "🐉",
+          "⚡",
+          "🧑‍💻",
+          "🔥",
+          "🦅",
+          "🐺",
+          "👩‍💻",
+          "🚀",
+          "🦁",
+        ];
+
+        const rows = json.values.slice(2);
+
+        const formatted = rows
+          .filter((row) => row[1])
+          .map((row, index) => {
+            const solveStr = row[4] || "0 / 0";
+            const solved = Number(solveStr.split("/")[0].trim()) || 0;
+
+            return {
+              id: index + 1,
+              name: row[1], 
+              handle: row[1],
+              solved: solved,
+              contest: 0, 
+              avatar: avatars[index % avatars.length],
+            };
+          });
 
         // Sort by solved descending for main leaderboard
         const sortedBySolved = [...formatted].sort(
-          (a, b) => b.solved - a.solved
+          (a, b) => b.solved - a.solved,
         );
         setMainLeaderboard(sortedBySolved);
 
         // Sort by contest descending for contest leaderboard
         const sortedByContest = [...formatted].sort(
-          (a, b) => b.contest - a.contest
+          (a, b) => b.contest - a.contest,
         );
         setContestLeaderboard(sortedByContest);
       } catch (error) {
@@ -82,19 +106,19 @@ const Dashboard = ({ darkMode }) => {
           : setMainLeaderboard;
 
       const sorted = [...currentLeaderboard].sort(
-        (a, b) => b[field] - a[field]
+        (a, b) => b[field] - a[field],
       );
       setLeaderboard(sorted);
       setSortBy(field);
     },
-    [mainLeaderboard, contestLeaderboard, activeTab]
+    [mainLeaderboard, contestLeaderboard, activeTab],
   );
 
   // Filter leaderboard based on search term
   const currentLeaderboard =
     activeTab === "contestLeaderboard" ? contestLeaderboard : mainLeaderboard;
   const filteredLeaderboard = currentLeaderboard.filter((trainee) =>
-    trainee.name.toLowerCase().includes(searchTerm.toLowerCase())
+    trainee.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   const getRankBadge = useCallback((rank, isContest = false) => {
@@ -141,14 +165,14 @@ const Dashboard = ({ darkMode }) => {
       {trainees.map((trainee, index) => {
         const { medal, crown, color, bgColor, icon } = getRankBadge(
           index,
-          isContest
+          isContest,
         );
         const height =
           index === 0
             ? "h-60 md:h-72"
             : index === 1
-            ? "h-52 md:h-64"
-            : "h-48 md:h-60";
+              ? "h-52 md:h-64"
+              : "h-48 md:h-60";
 
         return (
           <div
@@ -237,8 +261,8 @@ const Dashboard = ({ darkMode }) => {
                   ? "🏆"
                   : "🥇"
                 : rank === 1
-                ? "🥈"
-                : "🥉"}
+                  ? "🥈"
+                  : "🥉"}
             </span>
           )}
         </div>
@@ -314,20 +338,15 @@ const Dashboard = ({ darkMode }) => {
         {/* Tabs - Improved for mobile */}
         <div className="flex justify-center mb-6 md:mb-10 px-2">
           <div
-            className={`inline-flex rounded-xl md:rounded-2xl p-1 ${
+            className={`flex rounded-xl md:rounded-2xl p-1 ${
               darkMode ? "bg-gray-800" : "bg-white shadow-md"
-            } overflow-x-auto w-full max-w-4xl`}
+            } w-full max-w-4xl overflow-hidden`}
           >
             {[
               {
                 id: "leaderboard",
                 name: "Leaderboard",
                 icon: <Trophy size={16} />,
-              },
-              {
-                id: "contestLeaderboard",
-                name: "Contest",
-                icon: <Zap size={16} />,
               },
               {
                 id: "progress",
@@ -344,14 +363,14 @@ const Dashboard = ({ darkMode }) => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-1 md:gap-2 px-3 md:px-6 py-2 md:py-3 font-medium rounded-lg md:rounded-xl transition-all flex-shrink-0 ${
+                className={`flex items-center gap-1 md:gap-2 px-3 md:px-6 py-2 md:py-3 font-medium rounded-lg md:rounded-xl transition-all flex-1 ${
                   activeTab === tab.id
                     ? darkMode
                       ? "bg-purple-600 text-white shadow-lg"
                       : "bg-gradient-to-r from-purple-500 to-pink-600 text-white shadow-lg"
                     : darkMode
-                    ? "text-gray-400 hover:text-gray-300"
-                    : "text-gray-500 hover:text-gray-700"
+                      ? "text-gray-400 hover:text-gray-300"
+                      : "text-gray-500 hover:text-gray-700"
                 }`}
               >
                 {tab.icon}
@@ -482,7 +501,7 @@ const Dashboard = ({ darkMode }) => {
                           (activeTab === "contestLeaderboard"
                             ? trainee.contest
                             : trainee.solved),
-                        0
+                        0,
                       )}
                     </p>
                   </div>
@@ -577,7 +596,7 @@ const Dashboard = ({ darkMode }) => {
                             HandleSort(
                               activeTab === "contestLeaderboard"
                                 ? "contest"
-                                : "solved"
+                                : "solved",
                             )
                           }
                         >
@@ -641,7 +660,7 @@ const Dashboard = ({ darkMode }) => {
                       target: 200,
                       progress: Math.min(
                         Math.round((mainLeaderboard.length / 200) * 100),
-                        100
+                        100,
                       ),
                       icon: <Users className="w-5 h-5 text-blue-500" />,
                       hoverIcon: <Users className="w-5 h-5 text-white" />,
@@ -651,19 +670,19 @@ const Dashboard = ({ darkMode }) => {
                       label: "Problems Solved",
                       current: mainLeaderboard.reduce(
                         (sum, trainee) => sum + trainee.solved,
-                        0
+                        0,
                       ),
                       target: 3000,
                       progress: Math.min(
                         Math.round(
                           (mainLeaderboard.reduce(
                             (sum, trainee) => sum + trainee.solved,
-                            0
+                            0,
                           ) /
                             3000) *
-                            100
+                            100,
                         ),
-                        100
+                        100,
                       ),
                       icon: <Code className="w-5 h-5 text-green-500" />,
                       hoverIcon: <Code className="w-5 h-5 text-white" />,
@@ -673,19 +692,19 @@ const Dashboard = ({ darkMode }) => {
                       label: "Contests Participated",
                       current: mainLeaderboard.reduce(
                         (sum, trainee) => sum + trainee.contest,
-                        0
+                        0,
                       ),
                       target: 50,
                       progress: Math.min(
                         Math.round(
                           (mainLeaderboard.reduce(
                             (sum, trainee) => sum + trainee.contest,
-                            0
+                            0,
                           ) /
                             50) *
-                            100
+                            100,
                         ),
-                        100
+                        100,
                       ),
                       icon: <Trophy className="w-5 h-5 text-amber-500" />,
                       hoverIcon: <Trophy className="w-5 h-5 text-white" />,
@@ -695,21 +714,21 @@ const Dashboard = ({ darkMode }) => {
                       label: "Active Participation",
                       current: Math.round(
                         (mainLeaderboard.filter(
-                          (t) => t.solved > 0 || t.contest > 0
+                          (t) => t.solved > 0 || t.contest > 0,
                         ).length /
                           mainLeaderboard.length) *
-                          100
+                          100,
                       ),
                       target: 70,
                       progress: Math.min(
                         Math.round(
                           (mainLeaderboard.filter(
-                            (t) => t.solved > 0 || t.contest > 0
+                            (t) => t.solved > 0 || t.contest > 0,
                           ).length /
                             mainLeaderboard.length) *
-                            100
+                            100,
                         ),
-                        100
+                        100,
                       ),
                       icon: (
                         <TrendingUpIcon className="w-5 h-5 text-purple-500" />
@@ -741,8 +760,8 @@ const Dashboard = ({ darkMode }) => {
                               hoveredStat === idx
                                 ? `${stat.color} transform scale-110`
                                 : darkMode
-                                ? "bg-gray-600"
-                                : "bg-white shadow-sm"
+                                  ? "bg-gray-600"
+                                  : "bg-white shadow-sm"
                             }`}
                           >
                             {hoveredStat === idx ? stat.hoverIcon : stat.icon}
@@ -784,7 +803,7 @@ const Dashboard = ({ darkMode }) => {
                         <span
                           className={`text-xs font-semibold ${stat.color.replace(
                             "bg-",
-                            "text-"
+                            "text-",
                           )}`}
                         >
                           {stat.progress}%
@@ -809,25 +828,25 @@ const Dashboard = ({ darkMode }) => {
 
                       if (idx === 0) {
                         currentMembers = mainLeaderboard.filter(
-                          (t) => t.solved >= 0 && t.solved <= 50
+                          (t) => t.solved >= 0 && t.solved <= 50,
                         ).length;
                       } else if (idx === 1) {
                         currentMembers = mainLeaderboard.filter(
-                          (t) => t.solved > 50 && t.solved <= 200
+                          (t) => t.solved > 50 && t.solved <= 200,
                         ).length;
                       } else if (idx === 2) {
                         currentMembers = mainLeaderboard.filter(
-                          (t) => t.solved > 200 && t.solved <= 500
+                          (t) => t.solved > 200 && t.solved <= 500,
                         ).length;
                       } else if (idx === 3) {
                         currentMembers = mainLeaderboard.filter(
-                          (t) => t.solved > 500
+                          (t) => t.solved > 500,
                         ).length;
                       }
 
                       const goalMembers = [200, 50, 20, 2][idx];
                       const progress = Math.round(
-                        (currentMembers / goalMembers) * 100
+                        (currentMembers / goalMembers) * 100,
                       );
 
                       return (
@@ -903,16 +922,16 @@ const Dashboard = ({ darkMode }) => {
                     title: "Average Problems Solved",
                     description: `Average: ${Math.round(
                       mainLeaderboard.reduce((sum, t) => sum + t.solved, 0) /
-                        mainLeaderboard.length
+                        mainLeaderboard.length,
                     )} per member`,
                     progress: Math.min(
                       Math.round(
                         (mainLeaderboard.reduce((sum, t) => sum + t.solved, 0) /
                           mainLeaderboard.length /
                           50) *
-                          100
+                          100,
                       ),
-                      100
+                      100,
                     ),
                     icon: <Code className="w-5 h-5 text-blue-500" />,
                   },
@@ -920,19 +939,19 @@ const Dashboard = ({ darkMode }) => {
                     title: "Average Contest Points",
                     description: `Average: ${Math.round(
                       mainLeaderboard.reduce((sum, t) => sum + t.contest, 0) /
-                        mainLeaderboard.length
+                        mainLeaderboard.length,
                     )} points`,
                     progress: Math.min(
                       Math.round(
                         (mainLeaderboard.reduce(
                           (sum, t) => sum + t.contest,
-                          0
+                          0,
                         ) /
                           mainLeaderboard.length /
                           10) *
-                          100
+                          100,
                       ),
-                      100
+                      100,
                     ),
                     icon: <Trophy className="w-5 h-5 text-green-500" />,
                   },
@@ -940,15 +959,15 @@ const Dashboard = ({ darkMode }) => {
                     title: "Active Members",
                     description: `${
                       mainLeaderboard.filter(
-                        (t) => t.solved > 0 || t.contest > 0
+                        (t) => t.solved > 0 || t.contest > 0,
                       ).length
                     } out of ${mainLeaderboard.length} members active`,
                     progress: Math.round(
                       (mainLeaderboard.filter(
-                        (t) => t.solved > 0 || t.contest > 0
+                        (t) => t.solved > 0 || t.contest > 0,
                       ).length /
                         mainLeaderboard.length) *
-                        100
+                        100,
                     ),
                     icon: <Users className="w-5 h-5 text-amber-500" />,
                   },
@@ -1230,8 +1249,8 @@ const Dashboard = ({ darkMode }) => {
                         idx === 0
                           ? "animate-bounce"
                           : idx === 1
-                          ? "animate-pulse"
-                          : "animate-ping"
+                            ? "animate-pulse"
+                            : "animate-ping"
                       }`}
                     >
                       {level.icon}
@@ -1290,8 +1309,8 @@ const Dashboard = ({ darkMode }) => {
                               goalIdx === 0
                                 ? "text-green-500"
                                 : goalIdx === 1
-                                ? "text-yellow-500"
-                                : "text-red-500"
+                                  ? "text-yellow-500"
+                                  : "text-red-500"
                             }`}
                           />
                           <span

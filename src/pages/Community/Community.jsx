@@ -80,28 +80,34 @@ const Community = ({ darkMode }) => {
     },
   ];
 
+  const memberImages = import.meta.glob("../../assets/images/members/*.jpeg", {
+    eager: true,
+  });
+
   useEffect(() => {
     async function fetchTeamMembers() {
       try {
         setIsLoading(true);
         const response = await fetch(
-          "https://opensheet.elk.sh/1VF6w6SKcT9EkDjmGVjpRJZ2aMZ4hzSgXHCeJd4h0iPM/Sheet1"
+          "https://opensheet.elk.sh/1VF6w6SKcT9EkDjmGVjpRJZ2aMZ4hzSgXHCeJd4h0iPM/Sheet1",
         );
         const data = await response.json();
 
         const formatted = data.map((member) => {
           const links = {};
-
           if (member.facebook) links.facebook = member.facebook;
           if (member.linkedin) links.linkedin = member.linkedin;
           if (member.mail) links.mail = member.mail;
           if (member.github) links.github = member.github;
 
+          const imageKey = `../../assets/images/members/${member.id}.jpeg`;
+          const localImage = memberImages[imageKey]?.default || null;
+
           return {
             id: Number(member.id),
             name: member.name,
             role: member.role,
-            image: member.image,
+            image: localImage || member.image,
             about: member.about,
             rating: Number(member.rating) || 0,
             skills: member.skills ? member.skills.split(",") : [],
@@ -126,13 +132,13 @@ const Community = ({ darkMode }) => {
     activeThisWeek: teamMembers.filter((member) => member.rating >= 4).length,
     problemsSolved: teamMembers.reduce(
       (sum, member) => sum + (member.skills?.length || 0) * 10,
-      0
+      0,
     ),
     contestsParticipated:
       teamMembers.filter(
         (member) =>
           member.role.toLowerCase().includes("problem setter") ||
-          member.role.toLowerCase().includes("mentor")
+          member.role.toLowerCase().includes("mentor"),
       ).length * 5,
   };
 
@@ -486,9 +492,7 @@ const Community = ({ darkMode }) => {
                         alt={member.name}
                         className="w-full h-full object-cover"
                         onError={(e) => {
-                          e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                            member.name
-                          )}&background=random`;
+                          e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=random`;
                         }}
                       />
                     </div>
@@ -597,7 +601,7 @@ const Community = ({ darkMode }) => {
                           className="w-10 h-10 rounded-full object-cover"
                           onError={(e) => {
                             e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                              contributor.name
+                              contributor.name,
                             )}&background=random`;
                           }}
                         />
@@ -647,8 +651,8 @@ const Community = ({ darkMode }) => {
                           index === 0
                             ? "text-yellow-500"
                             : index === 1
-                            ? "text-gray-400"
-                            : "text-orange-500"
+                              ? "text-gray-400"
+                              : "text-orange-500"
                         }`}
                       >
                         #{index + 1}
@@ -775,7 +779,7 @@ const Community = ({ darkMode }) => {
           onClick={() => setActiveMember(null)}
         >
           {/* Overlay مع blur */}
-          <div className="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm"></div>
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-md"></div>
 
           {/* Modal Content */}
           <div
@@ -795,7 +799,7 @@ const Community = ({ darkMode }) => {
                     className="w-full h-full object-cover"
                     onError={(e) => {
                       e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                        activeMember.name
+                        activeMember.name,
                       )}&background=random`;
                     }}
                   />
@@ -853,11 +857,12 @@ const Community = ({ darkMode }) => {
                   {activeMember.skills.map((skill, index) => (
                     <span
                       key={index}
-                      className={`px-3 py-1 rounded-full text-sm ${
-                        darkMode
-                          ? "bg-gray-700 text-gray-300"
-                          : "bg-gray-100 text-gray-700"
-                      }`}
+                      className={`px-3 py-1 rounded-full text-sm cursor-default
+  transition-all duration-200 hover:scale-110 hover:shadow-md ${
+    darkMode
+      ? "bg-gray-700 text-gray-300 hover:bg-blue-600 hover:text-white"
+      : "bg-gray-100 text-gray-700 hover:bg-blue-500 hover:text-white"
+  }`}
                     >
                       {skill}
                     </span>
